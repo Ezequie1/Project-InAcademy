@@ -1,0 +1,158 @@
+#tsparticles{
+    background-image: url('../../Images/backgroundImage.png');
+}
+
+.contentPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    height: 100vh;
+    gap: 5%;
+}
+
+.inmetricsLogo{
+    width: 25vw;
+}
+
+.form{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1%;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 5px 15px;
+    border-radius: 8px;
+    width: 20%;
+}
+
+.icon{
+    color: gray;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.iconInm{
+    width: 85px;
+    height: 85px;
+}
+
+.divOu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 5%;
+    color: gray;
+    margin: 10px 0px 10px 0px
+}
+
+.divOu span{
+    background-color: #d6d6d6;
+    height: 2px;
+    width: 45%;
+    border-radius: 5px;
+}
+
+.microsoftButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid grey;
+    height: 40px;
+    gap: 10px;
+    font-size: 1rem;
+    border-radius: 3px;
+    width: 90%;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.microsoftButton img{
+    height: 25px;
+    width: 25px;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.formContent p:first-child{
+    font-size: 1.2rem;
+    margin: 20px 0px 0px 0px;
+}
+
+.subtitleLogin{
+    font-size: 0.8rem;
+    margin: 10px 0px 3% 0px;
+}
+
+.subtitleLogin span{
+    color: #009ce0;
+    cursor: pointer;
+}
+
+.formContent div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 4% 0px 4% 0px;
+    width: 100%;
+}
+
+.formContent label{
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    color: rgb(150, 150, 150);
+    cursor: text;
+    z-index: 1;
+    transition: 0.3s ease-in-out;
+}
+
+.formContent div input{
+    width: 100%;
+    color: rgb(56, 56, 56);
+    border: 0;
+    z-index: 2;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    outline: 0;
+    font-size: 18px;
+}
+
+.formContent div input:focus, 
+.formContent div input:valid{
+    border-bottom: 1px solid #ffca00;
+}
+
+.formContent div input:focus ~ label, 
+.formContent div input:valid ~ label{
+    transform: translateY(-25px);
+    font-size: 12px;
+    color: #ffca00;
+}
+
+#inputLogin, #inputRegister{
+    margin-right: -7%;
+    padding-right: 7%;
+}
+
+.formContent button{
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffca00;
+    margin-top: 10px;
+    font-weight: 500;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
