@@ -1,31 +1,64 @@
-  *{
-    font-family: "Montserrat";
-  }
-  
-  body {
-    margin: 0px;
-    position: relative;
-    height: 100vh;
-    width: 100%;
-  }
-  
-  .App-header {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
-  
-  #tsparticles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
+*{
+  font-family: "Montserrat";
+}
 
-  .particlesBack{
-    background-color: #fff;
-    height: 100vh;
-    width: 100vw;
-  }
+:root{
+  --blue: #009ce0;
+  --lightBlue: #009de041;
+  --yellow: #ffca00;
+  --green: green;
+  --red: red;
+  --backgroundColor: #fff;
+  --backgroundSecondary: #eeee;
+  --border: #b5b5b5;
+  --title: #000;
+  --lightBlack: #454545;
+  --subtitle: #525252;
+  --borderLight: #a5a5a5;
+  --shadow: #eeeeee;
+  --borderInputSearch: #b5b5b5;
+}
+
+[data-theme="dark"] {
+  --blue: #009ce0;
+  --lightBlue: #009de041;
+  --yellow: #ffca00;
+  --green: green;
+  --red: red;
+  --lightBlack: #b3b3b3;
+  --border: #5a5a5a;
+  --backgroundColor: #161616;
+  --backgroundSecondary: #232323;
+  --title: #dddddd;
+  --subtitle: #999999;
+  --borderLight: #a5a5a5;
+  --shadow: #252525;
+}
+
+body {
+  margin: 0px;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.App-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.particlesBack{
+  background-color: #fff;
+  height: 100vh;
+  width: 100vw;
+}

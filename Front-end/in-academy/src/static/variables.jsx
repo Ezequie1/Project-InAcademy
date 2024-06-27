@@ -1,5 +1,3 @@
-import { light } from "@mui/material/styles/createPalette"
-
 export const particles = {
     config: {
         particles: {
@@ -111,21 +109,4 @@ export const particles = {
         },
         retina_detect: true
       }
-}
-
-export const colors = {
-  light: {
-    pallet: {
-      yellow: '#ffca00',
-      blue: '#009ce0'
-    },
-    principal: '#fff'
-  },
-  dark: {
-    pallet: {
-      yellow: '#ffca00',
-      blue: '#009ce0'
-    },
-    principal: '#fff'
-  }
 }
