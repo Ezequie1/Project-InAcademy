@@ -1,0 +1,40 @@
+.contentHome{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcomeDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+}
+
+.welcomeDiv h1{
+    color: var(--title);
+}
+
+.welcomeDiv p{
+    color: var(--blue);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.inProgressCoursesDiv{
+    width: 60vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow-x: scroll;
+    position: relative;
+    gap: 20px;
+}
+
+.inProgressCoursesDiv::-webkit-scrollbar{
+    scroll-behavior: smooth;
+    display: none;
+}

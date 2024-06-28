@@ -110,3 +110,30 @@ export const particles = {
         retina_detect: true
       }
 }
+
+export const progressCourses = [
+  {
+    title: 'Docker Completo',
+    author: 'Alexandre Moraes',
+    progress: 29,
+    img: 'https://img-c.udemycdn.com/course/240x135/4821926_131f.jpg',
+    totalUsers: 492,
+    totalHours: 42
+  },
+  {
+    title: 'Cloud Practitioner',
+    author: 'Luis Gustavo',
+    progress: 86,
+    img: 'https://img-c.udemycdn.com/course/240x135/3142166_a637_3.jpg',
+    totalUsers: 312,
+    totalHours: 42
+  },
+  {
+    title: 'TypeScript na raça',
+    author: 'Roberto Benner',
+    progress: 100,
+    img: 'https://img-c.udemycdn.com/course/240x135/947098_02ec_2.jpg',
+    totalUsers: 419,
+    totalHours: 42
+  }
+] 

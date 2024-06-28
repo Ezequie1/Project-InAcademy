@@ -1,0 +1,36 @@
+.divQr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 30%;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    width: 10vw;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.divQr div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.divQr h5{
+    margin: 8px;
+    color: var(--colorQrCode)
+}
+
+.divQr p{
+    margin: 8px;
+    color: var(--colorQrCode);
+    font-size: 0.7rem;
+}
+
+.divQr svg{
+    margin-right: 10px;
+}

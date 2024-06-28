@@ -7,7 +7,8 @@
   --lightBlue: #009de041;
   --yellow: #ffca00;
   --green: green;
-  --red: red;
+  --red: red;  
+  --bronze: #cd7f32;
   --backgroundColor: #fff;
   --backgroundSecondary: #eeee;
   --border: #b5b5b5;
@@ -17,6 +18,9 @@
   --borderLight: #a5a5a5;
   --shadow: #eeeeee;
   --borderInputSearch: #b5b5b5;
+  --backgroundQrCode: #252525;
+  --colorQrCode: #fff;
+  --colorSubtitleQrCode: 
 }
 
 [data-theme="dark"] {
@@ -24,6 +28,7 @@
   --lightBlue: #009de041;
   --yellow: #ffca00;
   --green: green;
+  --bronze: #cd7f32;
   --red: red;
   --lightBlack: #b3b3b3;
   --border: #5a5a5a;

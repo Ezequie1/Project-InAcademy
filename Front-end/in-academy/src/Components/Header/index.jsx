@@ -4,7 +4,7 @@ import iconInm from '../../Images/logoSite.png'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -19,12 +19,23 @@ import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
+import { Link, useLocation } from 'react-router-dom'
 
 export function Header(){
-
     const [ open, setOpen ] = useState({ side: '-25vw', mask: '0', index: '-3'})
     const [ isLight, setTheme ] = useState('1%')
     const [ selected, setSelected ] = useState('home')
+    const location = useLocation()
+
+    useEffect(() => {
+        let path = location.pathname.split('/')[1]
+
+        if (path !== selected){
+            setSelected(path)
+            changeSelection(path)
+        }
+        // eslint-disable-next-line
+    }, [location.pathname])
 
     const moveSideNav = () => {
         if(open.side === '0'){
@@ -44,9 +55,10 @@ export function Header(){
     }
 
     const changeSelection = (id) => {
-        if(id !== selected){
+        let element = document.getElementById(id)
+        if(id !== selected && element !== null){
             document.getElementById(selected).classList.remove('sectedSideNav')
-            document.getElementById(id).classList.add('sectedSideNav')
+            element.classList.add('sectedSideNav')
     
             setSelected(id)
         }
@@ -87,46 +99,64 @@ export function Header(){
                         <ArrowBackIosNewRoundedIcon onClick={moveSideNav} className='icon'/>
                     </div>
                     <section className='contentItensNav'>
-                        <div className='item sectedSideNav' id='home' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <HomeOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Home
-                        </div>
-                        <div className='item' id='meuAprendizado' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <SchoolOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Meu aprendizado
-                        </div>
-                        <div className='item' id='comunidade' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <PublicOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Comunidades
-                            <span>1</span>
-                        </div>
-                        <div className='item' id='todosOsCursos' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <AutoStoriesOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Todos os cursos
-                            <span>3</span>
-                        </div>
-                        <div className='item' id='membros' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <Groups2OutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Membros
-                        </div>
-                        <div className='item' id='ranking' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <EmojiEventsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Ranking
-                        </div>
-                        <div className='item' id='notificacoes' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <NotificationsNoneOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Notificações
-                            <span>23</span>
-                        </div>
+                        <Link to='/home' style={{textDecoration: 'none'}}>
+                            <div className='item sectedSideNav' id='home'>
+                                <HomeOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Home
+                            </div>
+                        </Link>
+                        <Link to='/meu-aprendizado' style={{textDecoration: 'none'}}>
+                            <div className='item' id='meu-aprendizado'>
+                                <SchoolOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Meu aprendizado
+                            </div>
+                        </Link>
+                        <Link to='/comunidades' style={{textDecoration: 'none'}}>
+                            <div className='item' id='comunidades'>
+                                <PublicOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Comunidades
+                                <span>1</span>
+                            </div>
+                        </Link>
+                        <Link to='/todos-os-cursos' style={{textDecoration: 'none'}}>
+                            <div className='item' id='todos-os-cursos'>
+                                <AutoStoriesOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Todos os cursos
+                                <span>3</span>
+                            </div>
+                        </Link>
+                        <Link to='/membros' style={{textDecoration: 'none'}}>
+                            <div className='item' id='membros'>
+                                <Groups2OutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Membros
+                            </div>
+                        </Link>
+                        <Link to='/ranking' style={{textDecoration: 'none'}}>
+                            <div className='item' id='ranking'>
+                                <EmojiEventsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Ranking
+                            </div>
+                        </Link>
+                        <Link to='/notificacoes' style={{textDecoration: 'none'}}>
+                            <div className='item' id='notificacoes'>
+                                <NotificationsNoneOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Notificações
+                                <span>23</span>
+                            </div>
+                        </Link>
                         <hr/>
-                        <div className='item' id='configuracoes' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <SettingsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Configurações
-                        </div>
-                        <div className='item' id='suporte' onClick={e => changeSelection(e.currentTarget.id)}>
-                            <HelpOutlineOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                            Suporte
-                        </div>
+                        <Link to='/configuracoes' style={{textDecoration: 'none'}}>
+                            <div className='item' id='configuracoes'>
+                                <SettingsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Configurações
+                            </div>
+                        </Link>
+                        <Link to='/suporte' style={{textDecoration: 'none'}}>
+                            <div className='item' id='suporte'>
+                                <HelpOutlineOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
+                                Suporte
+                            </div>
+                        </Link>
                     </section>
                 </section>
                 <section className='downSideNav'>
