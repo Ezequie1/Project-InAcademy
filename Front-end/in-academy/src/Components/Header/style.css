@@ -96,10 +96,10 @@ body{
 }
 
 .sideNav{
-    position: absolute;
+    position: fixed;
     background-color: var(--backgroundColor);
-    top: 0;
     z-index: 10;
+    top: 0;
     width: 20vw;
     height: 96vh;
     margin: 2vh 0px 2vh 2vh;
@@ -152,7 +152,7 @@ body{
 
 .mask{
     transition-duration: 0.5s;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;

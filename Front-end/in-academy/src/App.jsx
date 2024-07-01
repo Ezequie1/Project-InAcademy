@@ -1,9 +1,9 @@
 import './App.css'
 import { Routes, Route, BrowserRouter, useLocation, Navigate} from 'react-router-dom'
 import { LoginPage } from './Pages/Auth'
-import { Header } from './Components/Header';
-import { HomePage } from './Pages/Home';
-import { Forward } from '@mui/icons-material';
+import { Header } from './Components/Header'
+import { HomePage } from './Pages/Home'
+import { Footer } from './Components/Footer'
 
 export default function App() {
   return (
@@ -33,6 +33,7 @@ function AppContent(){
         <Route path="/suporte" element={'Suporte'}/>
         <Route path="*" element={<Navigate to='/auth'/>}/>
       </Routes>
+      { !isAuthPath && <Footer/> }
     </>
 
   )

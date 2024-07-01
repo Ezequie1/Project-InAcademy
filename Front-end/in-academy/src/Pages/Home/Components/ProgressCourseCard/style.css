@@ -1,6 +1,6 @@
 .cardInProgress{
-    min-width: 20vw;
-    width: 20vw;
+    min-width: 22vw;
+    width: 22vw;
     border-radius: 5px;
     background-color: var(--backgroundColor);
     border: 1px solid var(--border);
@@ -55,18 +55,18 @@
 }
 
 .percentDivWithInfos{
-    width: 97%;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 10px;
-    margin: 0px 2% 0px 1%;
+    height: 30px;
+    gap: 1%;
     margin-bottom: 5px;
 }
 
 .percentDivWithInfos div{
     background-color: var(--shadow);
-    width: 100%;
+    width: 86%;
     height: 10px;
     display: flex;
     justify-content: start;
@@ -83,6 +83,7 @@
 }
 
 .percentDivWithInfos p{
+    width: 9%;
     color: var(--subtitle);
     margin: 0;
 }

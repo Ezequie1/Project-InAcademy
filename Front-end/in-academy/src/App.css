@@ -20,10 +20,9 @@
   --borderInputSearch: #b5b5b5;
   --backgroundQrCode: #252525;
   --colorQrCode: #fff;
-  --colorSubtitleQrCode: 
 }
 
-[data-theme="dark"] {
+[data-theme="dark"]{
   --blue: #009ce0;
   --lightBlue: #009de041;
   --yellow: #ffca00;

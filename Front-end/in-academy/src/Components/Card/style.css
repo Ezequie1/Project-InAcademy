@@ -1,0 +1,118 @@
+.cardCourse{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+    width: 12vw;
+    background-color: var(--backgroundColor);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.cardCourse:hover{
+    border: 1px solid var(--blue);
+}
+
+.cardCourse img{
+    width: 11vw;
+    border-radius: 3px;
+}
+
+.newCourse{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    background-color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.cardCourse h3{
+    font-size: 1.1rem;
+    color: var(--title);
+    margin: 8px 0px 0px 5px;
+}
+
+.cardCourse p{
+    font-size: 0.9rem;
+    color: var(--subtitle);
+    margin: 0;
+}
+
+.totalUsersAndTotalHoursDiv{
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.totalUsersAndTotalHoursDiv p{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    gap: 3px;
+}
+
+.ratingInfosDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.ratingInfosDiv h4{
+    margin: 0;
+    font-size: 1rem;
+    color: var(--title);
+}
+
+.ratingInfosDiv p{
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--subtitle);
+    background-color: var(--shadow);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.divWithButtonCard{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    gap: 5px;
+}
+
+.divWithButtonCard svg{
+    font-size: 1.8rem;
+}
+
+.divWithButtonCard button{
+    width: 100%;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+
+

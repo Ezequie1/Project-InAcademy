@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded'
-import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 
 export function ProgressCourseCard(params){
     const [ progress, setProgress ] = useState(0)
@@ -33,9 +34,9 @@ export function ProgressCourseCard(params){
             </div>
             <div className='percentDivWithInfos'>
                 <div>
-                    <span style={{width: `${progress}%`}}></span>
+                    <span style={{width: `${progress}%`, backgroundColor: progress === 100 ? 'var(--green)' : 'var(--blue)' }}></span>
                 </div>
-                <p>{ progress }%</p>
+                <p> { progress === 100 ? <CheckCircleOutlineIcon style={{color: 'var(--green)'}}/> : progress + '%' } </p>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 export function CarrouselSlider(){
     return(
-        <Carousel showStatus={false} width={'60vw'} showThumbs={false} className='carrousel'>
+        <Carousel autoPlay showStatus={false} width={'60vw'} showThumbs={false} infiniteLoop className='carrousel'>
             <img
                 src="https://coreui.io/react/docs/static/react-83088efde08a5dedde9f67a954cb4b5b.jpg"
                 alt=""

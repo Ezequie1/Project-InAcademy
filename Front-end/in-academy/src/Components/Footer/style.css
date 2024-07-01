@@ -1,0 +1,60 @@
+.divFooter{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 12vh;
+    background-color: var(--backgroundColor);
+    margin: 5vh 0px 0px 0px;
+}
+
+.divFooter img{
+    width: 15vh;
+}
+
+.divFooter div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.divFooter h4{
+    color: var(--subtitle);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.divFooter p{
+    color: var(--subtitle);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.iconFooter{
+    color: var(--subtitle);
+    margin: 0px 3px 0px 3px;
+    transition: 1s ease-in-out;
+    cursor: pointer;
+}
+
+.facebook:hover{
+    color: #3b5998;
+}
+
+.instagram:hover{ 
+    color:#cc2366; 
+}
+
+.linkedin:hover{
+    color: #0e76a8;
+}
+
+
+.twitter:hover{
+    color: var(--title);
+}
+
+#imageFooter{
+    background-image: var(--imgFooter);
+}
