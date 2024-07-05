@@ -8,6 +8,7 @@ import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRound
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import { ProgressCourseCard } from './Components/ProgressCourseCard'
 import { CardCourse } from '../../Components/Card'
+import { ModalMoreInfos } from './Components/MoreInfos'
 
 export function HomePage(){
 
@@ -49,6 +50,7 @@ export function HomePage(){
                     { progressCourses.length > 2 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'right')}/> }
                 </div>
             </section>
+            <ModalMoreInfos/>
         </>
     )
 }
