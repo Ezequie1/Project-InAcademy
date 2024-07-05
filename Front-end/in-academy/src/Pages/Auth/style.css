@@ -21,10 +21,22 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 1%;
+    padding: 20px;
     box-shadow: rgba(255, 255, 255, 0.3) 0px 5px 15px;
     border-radius: 8px;
-    width: 20%;
+    width: clamp( 300px, 90%, 390px);
+    box-sizing: border-box;
+}
+
+.stackText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+}
+
+.stackText svg{
+    margin-right: 10px;
 }
 
 .icon{
@@ -138,7 +150,7 @@
     color: #ffca00;
 }
 
-#inputLogin, #inputRegister{
+#password{
     margin-right: -7%;
     padding-right: 7%;
 }
@@ -155,4 +167,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (width < 1000px){
+    .inmetricsLogo{
+        display: none;
+    }
 }

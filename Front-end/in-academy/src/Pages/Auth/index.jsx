@@ -9,103 +9,106 @@ import { loadSlim } from 'tsparticles-slim'
 import { particles } from '../../static/variables'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { register, sign } from '../../Service'
+import Snackbar from '@mui/material/Snackbar'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import { useNavigate } from 'react-router-dom'
 
 export function LoginPage(){
-    const particlesInit = useCallback( async engine => await loadSlim(engine), []);
+    const particlesInit = useCallback( async engine => await loadSlim(engine), [])
     const [ auth, setAuth ] = useState(true)
+    const [ see, setSee ] = useState('password')
+    const navigate = useNavigate()
+    const [ buttonText, setButtonText ] = useState({
+        auth: 'Entrar',
+        sso: (<> <img src={ logoMicrosoft } alt=''/>Microsoft </>)
+    })
 
-    const RenderSign = () => {
-        const [ see, setSee ] = useState('password')
-        const [ textButton, setTextButton ] = useState('Login')
+    const [openSnack, setSnack] = useState({ 
+        open: false,
+        message: 'Olá!'
+    })
 
-        const changePasswordVisibility = () => {
-            see === 'password' ? setSee('text') : setSee('password');
-        }
-
-        const login = () =>{
-            setTextButton(<CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/>)
-
-            setTimeout(() => setTextButton('Login'), 1000)
-        }
-
-        return(
-            <div className='formContent'>
-                <p>Faça login para continuar</p>
-                <p className='subtitleLogin'>Ainda não possui conta? <span onClick={() => setAuth(false)}>Cadastre-se</span>!</p>
-                <div>
-                    <input type="text" required id='email'/>
-                    <label htmlFor='email' className="inputLabel">
-                        Email
-                    </label>
-                </div>
-                <div>
-                    <input type={see} required id='inputLogin'/>
-                    <label htmlFor='inputLogin'>
-                        Senha
-                    </label>
-                    { see === 'password' ? <VisibilityOffIcon onClick={changePasswordVisibility} className='icon'/> : <VisibilityIcon className='icon' onClick={changePasswordVisibility}/> }
-                </div>
-                <button onClick={login}>{ textButton }</button>
-            </div>
-        )
+    const changePasswordVisibility = () => {
+        see === 'password' ? setSee('text') : setSee('password')
     }
 
-    const RenderRegister = () =>{
-        const [ see, setSee ] = useState('password')
-        const [ textButton, setTextButton ] = useState('Cadastre-se')
+    const changeForm = () => {
+        let value = auth ? 'Cadastre-se': 'Entrar'
 
-        const changePasswordVisibility = () => {
-            see === 'password' ? setSee('text') : setSee('password');
+        setButtonText({...buttonText, auth: value })
+        setAuth(!auth)
+    } 
+
+    function sendForm(){
+        setButtonText({...buttonText, auth: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/>})
+
+        if(auth){
+            sign({
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }).then( res => {
+                localStorage.setItem('t', res.data.token)
+
+                setTimeout(() => {
+                    navigate('/home')
+                    setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                }, 1000)
+            }).catch( err => {
+                if(err.response.status === 400){
+
+                    setTimeout(() => {
+                        setSnack({
+                            open: true,
+                            message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Email ou senha inválidos!</p>
+                        })    
+                        setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                    }, 1000)
+                }else{
+
+                    setTimeout(() => {
+                        setSnack({
+                            open: true,
+                            message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Erro ao tentar fazer login!</p>
+                        })    
+                        setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                    }, 1000)
+                }
+            })
+        }else{
+            register({
+                name: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }).then( res =>{
+                localStorage.setItem('t', res.data.token)
+                localStorage.setItem('first_access', true)
+
+                setTimeout(() => {
+                    navigate('/home')
+                    setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                }, 1000)
+            }).catch( err => {
+                if(err.response.status === 400){
+
+                    setTimeout(() => {
+                        setSnack({
+                            open: true,
+                            message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Já existe usuário com este email! Tente um email diferente</p>
+                        })    
+                        setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                    }, 1000)
+                }else{
+                    setTimeout(() => {
+                        setSnack({
+                            open: true,
+                            message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Não foi possível criar o usuário!</p>
+                        })    
+                        setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
+                    }, 1000)
+                }
+            })
         }
-
-        const register = () =>{
-            setTextButton(<CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/>)
-    
-            setTimeout(() => setTextButton('Cadastre-se'), 1000)
-        }
-
-        return(
-            <div className='formContent'>
-                <p>Cadastre-se para criar sua conta!</p>
-                <p className='subtitleLogin'>Já possui conta? <span onClick={() => setAuth(true)}>Entre</span>!</p>
-                <div>
-                    <input type="text" required id='nome'/>
-                    <label htmlFor='nome'>
-                        Nome
-                    </label>
-                </div>
-                <div>
-                    <input type="text" required id='email'/>
-                    <label htmlFor='email'>
-                        Email
-                    </label>
-                </div>
-                <div>
-                    <input type={see} required id='inputRegister'/>
-                    <label htmlFor='inputRegister'>
-                        Senha
-                    </label>
-                    { see === 'text' ? <VisibilityOffIcon onClick={changePasswordVisibility} className='icon'/> : <VisibilityIcon className='icon' onClick={changePasswordVisibility}/> }
-                </div>
-                <button onClick={register}>{ textButton }</button>
-            </div>
-        )
-    }
-
-    const RenderSSO = () => {
-        const [ ssoText, setSsoText ] = useState(<><img src={ logoMicrosoft } alt=''/>Microsoft</>) 
-
-        const ssoLogin = () => {
-            setSsoText(<CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/>)
-    
-            setTimeout(() => setSsoText(<><img src={ logoMicrosoft } alt=''/>Microsoft</>), 1000)
-        }
-
-        return( 
-            <button className='microsoftButton' onClick={ssoLogin}>
-                { ssoText }
-            </button>
-        )
     }
 
     return(
@@ -118,16 +121,49 @@ export function LoginPage(){
             <div className='contentPage'>
                 <div className='form'>
                     <img src={ smallLogo } className='iconInm' alt=''/>
-                    { auth ? <RenderSign/> : <RenderRegister/> }
+                    <div className='formContent'>
+                        <p>{ auth ? 'Faça login para continuar' : 'Cadastre-se para criar sua conta!' }</p>
+                        <p className='subtitleLogin'> { auth ? 'Ainda não possui conta?' : 'Já possui conta?' } <span onClick={() => changeForm()}>{ auth ? 'Cadastre-se' : 'Entrar' }</span>!</p>
+                        { !auth &&
+                            <div>
+                                <input type="text" required id='nome'/>
+                                <label htmlFor='nome'>
+                                    Nome
+                                </label>
+                            </div>
+                        }
+                        <div>
+                            <input type="email" required id='email'/>
+                            <label htmlFor='email'>
+                                Email
+                            </label>
+                        </div>
+                        <div>
+                            <input type={see} required id='password'/>
+                            <label htmlFor='inputRegister'>
+                                Senha
+                            </label>
+                            { see === 'text' ? <VisibilityOffIcon onClick={changePasswordVisibility} className='icon'/> : <VisibilityIcon className='icon' onClick={changePasswordVisibility}/> }
+                        </div>
+                        <button onClick={sendForm}>{ buttonText.auth }</button>
+                    </div>
                     <div className='divOu'>
                         <span/>
                         <p>Ou</p>
                         <span/>
                     </div>
-                    <RenderSSO/>
+                    <button className='microsoftButton'>
+                        { buttonText.sso}
+                    </button>
                 </div>
                 <img src={ logo } className='inmetricsLogo' type="image/svg+xml" alt=''/>
             </div>
+            <Snackbar
+                open={ openSnack.open }
+                autoHideDuration={ 3000 }
+                onClose={() => setSnack({...openSnack, open: false})}
+                message={ openSnack.message }
+            />
         </>
     )
 }
