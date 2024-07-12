@@ -18,13 +18,9 @@ export async function register(requestObject){
     )
 }
 
-export async function isAuthenticated(){
-    const token = localStorage.getItem('t')
-
-    if(token === null || token === '') return false
-
-    return await axios.get(
-        'http://localhost:8080/auth/isAuthenticated',
-        { headers: { Authorization: token }}
+export async function getUserWithContext(token){
+    return await api.get(
+        '/auth/getUser',
+        { headers: { Authorization: `Bearer ${token}` }}
     )
 }

@@ -59,6 +59,7 @@ export function ModalMoreInfos(){
             }else{
                 elements.forEach( element => {
                     element.classList.remove('slideToSecondNext')
+                    element.classList.remove('slideToSecondBack')
                     element.classList.add('slideToFirstBack')
                 })
                 document.getElementById('firstLine').classList.add('previousStep')

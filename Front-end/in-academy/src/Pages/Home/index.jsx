@@ -49,6 +49,17 @@ export function HomePage(){
                     </div>
                     { progressCourses.length > 2 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'right')}/> }
                 </div>
+                <div className='welcomeDiv'>
+                    <h1>Busque por categoria</h1>
+                    <p>Categorias</p>
+                </div>
+                <div className='contentDiv'>
+                    { progressCourses.length > 2 && <ArrowBackIosNewRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'left')}/> }
+                    <div className='inProgressCoursesDiv' id='addRecently'>
+                        { courses.map((course, index) => <CardCourse course={course} key={index}/> ) }  
+                    </div>
+                    { progressCourses.length > 2 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'right')}/> }
+                </div>
             </section>
             <ModalMoreInfos/>
         </>

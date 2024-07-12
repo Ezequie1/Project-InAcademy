@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import logo from '../../Images/Inmetrics-Logo.svg'
 import smallLogo from '../../Images/logoSite.png'
 import logoMicrosoft from '../../Images/microsoftLogo.png'
@@ -13,12 +13,14 @@ import { register, sign } from '../../Service'
 import Snackbar from '@mui/material/Snackbar'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../../Context/authProvider'
 
 export function LoginPage(){
     const particlesInit = useCallback( async engine => await loadSlim(engine), [])
     const [ auth, setAuth ] = useState(true)
     const [ see, setSee ] = useState('password')
     const navigate = useNavigate()
+    const context = useContext(Context)
     const [ buttonText, setButtonText ] = useState({
         auth: 'Entrar',
         sso: (<> <img src={ logoMicrosoft } alt=''/>Microsoft </>)
@@ -26,7 +28,7 @@ export function LoginPage(){
 
     const [openSnack, setSnack] = useState({ 
         open: false,
-        message: 'Olá!'
+        message: ''
     })
 
     const changePasswordVisibility = () => {
@@ -49,6 +51,7 @@ export function LoginPage(){
                 password: document.getElementById('password').value
             }).then( res => {
                 localStorage.setItem('t', res.data.token)
+                context.login()
 
                 setTimeout(() => {
                     navigate('/home')
@@ -83,6 +86,7 @@ export function LoginPage(){
             }).then( res =>{
                 localStorage.setItem('t', res.data.token)
                 localStorage.setItem('first_access', true)
+                context.login()
 
                 setTimeout(() => {
                     navigate('/home')
