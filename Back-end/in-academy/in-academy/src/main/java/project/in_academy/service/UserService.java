@@ -38,14 +38,21 @@ public class UserService {
         String email = tokenService.getSubject(token.replace("Bearer ", ""));
         User user = repository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
-        String fileName = user.getUserId() + "." + file.getOriginalFilename().split("\\.")[1];
+        String fileName = "users/" + user.getUserId() + "/image/userImage.jpeg";
 
         try {
+            if(user.getUrlImageUser() != null) amazonS3.deleteObject(bucketName, fileName);
+
             amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file.getInputStream(), null));
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload file", e);
         }
 
-        return amazonS3.getUrl(bucketName, fileName).toString();
+        String urlImage = amazonS3.getUrl(bucketName, fileName).toString();
+
+        user.setUrlImageUser(urlImage);
+        repository.save(user);
+
+        return urlImage;
     }
 }

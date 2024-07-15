@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import project.in_academy.model.User;
 import project.in_academy.service.UserService;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/image")
-    public ResponseEntity<String> changeUserImage(@RequestParam(value = "file") MultipartFile file, @RequestHeader("Authorization") String token){
+    public ResponseEntity<String> changeUserImage(@RequestParam(value = "file") MultipartFile file, @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok().body(service.changeUserImage(file, token));
     }
 }
