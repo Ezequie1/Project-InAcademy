@@ -1,4 +1,3 @@
 package project.in_academy.dto;
 
-public record TokenResponseDTO(String token) {
-}
+public record TokenResponseDTO(String token) {}

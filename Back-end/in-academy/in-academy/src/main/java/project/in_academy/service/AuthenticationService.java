@@ -48,4 +48,12 @@ public class AuthenticationService {
 
         return ResponseEntity.badRequest().build();
     }
+
+    public ResponseEntity<User> getContext(String token) {
+        String email = tokenService.getSubject(token.replace("Bearer ", ""));
+
+        return ResponseEntity.ok().body(
+                repository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"))
+        );
+    }
 }

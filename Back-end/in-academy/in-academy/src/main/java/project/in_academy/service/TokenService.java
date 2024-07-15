@@ -50,4 +50,14 @@ public class TokenService {
     public Instant generateExpiratioinTime(){
         return LocalDateTime.now().plusHours(3).toInstant(ZoneOffset.of("-03:00"));
     }
+
+    public String getSubject(String token){
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        return JWT.require(algorithm)
+                .withIssuer("auth-in-academy")
+                .build()
+                .verify(token)
+                .getSubject();
+    }
 }

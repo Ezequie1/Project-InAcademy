@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.in_academy.dto.LoginRequestDTO;
 import project.in_academy.dto.RegisterRequestDTO;
 import project.in_academy.dto.TokenResponseDTO;
+import project.in_academy.model.User;
 import project.in_academy.service.AuthenticationService;
 
 @RestController
@@ -25,8 +26,8 @@ public class AuthController {
         return service.register(request);
     }
 
-    @GetMapping("/isAuthenticated")
-    public ResponseEntity<String> isAuthenticated(){
-        return ResponseEntity.ok().body("OK");
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUser(@RequestHeader("Authorization") String token){
+        return service.getContext(token);
     }
 }

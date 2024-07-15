@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -19,6 +21,7 @@ public class Comments {
     private String text;
     @Max(5)
     private int rating;
+    private LocalDate commentDate;
     @ManyToOne
     @JoinColumn(name = "userId")
     private User userId;
