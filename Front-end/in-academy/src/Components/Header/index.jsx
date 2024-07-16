@@ -1,4 +1,5 @@
 import './style.css'
+import React, { useContext } from 'react'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 import iconInm from '../../Images/logoSite.png'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
@@ -20,8 +21,10 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import { Link, useLocation } from 'react-router-dom'
+import { Context } from '../../Context/authProvider'
 
 export function Header(){
+    const { userData, logout } = useContext(Context)
     const [ open, setOpen ] = useState({ side: '-25vw', mask: '0', index: '-3'})
     const [ isLight, setTheme ] = useState('1%')
     const [ selected, setSelected ] = useState('home')
@@ -36,6 +39,8 @@ export function Header(){
         }
         // eslint-disable-next-line
     }, [location.pathname])
+
+    console.log(userData)
 
     const moveSideNav = () => {
         if(open.side === '0'){
@@ -83,9 +88,17 @@ export function Header(){
                         </span>
                     </div>
                     <FavoriteRoundedIcon fontSize='large' className='icon'/>
-                    <div className='imageUserDiv'>
-                        E
-                    </div>
+                    { userData ? 
+                        <>
+                            {userData.urlImageUser !== null ? 
+                                <div style={{backgroundImage: `url(${ userData.urlImageUser })`}} className='imageUserDiv'></div>
+                                :
+                                <div className='imageUserDiv'>{ userData.name.split('')[0] }</div>  
+                            }
+                        </>
+                        :
+                        <></>       
+                    }
                 </div>
             </nav>
             <div className='mask' style={{ opacity: open.mask, zIndex: open.index }} onClick={moveSideNav}></div>
@@ -170,13 +183,27 @@ export function Header(){
                         </p>
                     </div>
                     <div className='userInfosSideNav'>
-                        <div>
-                            E
-                        </div>
-                        <h1>Ezequiel Alves <span></span></h1>
-                        <p>ezequiel.moura@inmetrics.com.br <ContentCopyRoundedIcon fontSize='0.2rem' style={{cursor: 'pointer'}} onClick={ () => navigator.clipboard.writeText('ezequiel.moura@inmetrics.com.br')}/></p>
-
-                        <button>
+                        { userData !== null ?
+                            <>
+                                {userData.urlImageUser !== null ? 
+                                    <div style={{ backgroundImage: `url(${ userData.urlImageUser })` }} className='imageUserDiv'></div>
+                                    :
+                                    <div> { userData.name.split('')[0] } </div>
+                                }
+                                <h1>{ userData.name }<span></span></h1>
+                                <p id="emailInfoId">
+                                    { userData.email } 
+                                    <ContentCopyRoundedIcon 
+                                        fontSize='0.2rem' 
+                                        style={{cursor: 'pointer'}} 
+                                        onClick={ ()  => navigator.clipboard.writeText(document.getElementById("emailInfoId").innerText)}
+                                    />
+                                </p>
+                            </>
+                            : 
+                            <></>
+                        }
+                        <button onClick={logout}>
                             Sair <LogoutOutlinedIcon/>
                         </button>
                     </div>

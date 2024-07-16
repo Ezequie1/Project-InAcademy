@@ -17,7 +17,7 @@ export function ProgressCourseCard(params){
     }
     
     // eslint-disable-next-line
-    useEffect(() => process(1),[])
+    useEffect(() => process(1), [])
 
     return(
         <div className='cardInProgress'>

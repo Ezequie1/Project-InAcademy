@@ -11,7 +11,6 @@ export function AuthProvider({ children }){
 
     useEffect(() => {
         async function isLoged(){
-
             let token = localStorage.getItem('t')
 
             if(token){
@@ -19,7 +18,7 @@ export function AuthProvider({ children }){
                     setUser(res.data)
                     setAuthenticated(true)
                     setLoading(false)
-                    
+
                 }).catch(() => {
                     setAuthenticated(false)
                     setLoading(false)
@@ -36,16 +35,26 @@ export function AuthProvider({ children }){
     const logout = () => {
         localStorage.removeItem('t')
         setAuthenticated(false)
+        setUser(null)
     }
 
     const login = () => {
         setAuthenticated(true)
+        reloadUserData()
+    }
+
+    const reloadUserData = async () => {
+        getUserWithContext(
+            localStorage.getItem('t')
+        ).then( res => {
+            setUser(res.data)
+        })
     }
 
     if(loading){ return <Loading/> }
 
     return(
-        <Context.Provider value={{ isUserAuth: isAuthenticated, userData: user, logout, login }}>
+        <Context.Provider value={{ isUserAuth: isAuthenticated, userData: user, logout, login, reloadUserData }}>
             { children }
         </Context.Provider>
     )

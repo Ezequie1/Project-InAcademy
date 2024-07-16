@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './style.css'
 import { Ranking } from './Components/Ranking'
 import { QrCode } from './Components/QrCode'
@@ -9,8 +9,11 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import { ProgressCourseCard } from './Components/ProgressCourseCard'
 import { CardCourse } from '../../Components/Card'
 import { ModalMoreInfos } from './Components/MoreInfos'
+import { Context } from '../../Context/authProvider'
 
 export function HomePage(){
+
+    const { userData } = useContext(Context);
 
     const smoothCarrousel = (id, to) => {
         let size = ( window.innerWidth / 10 ) * 4.4 + 20
@@ -28,7 +31,7 @@ export function HomePage(){
             <section className='contentHome'>
                 <CarrouselSlider/>
                 <div className='welcomeDiv'>
-                    <h1>Bem vindo Ezequiel!</h1>
+                    <h1>Bem vindo { userData && userData.name.split(" ")[0] }!</h1>
                     <p>Cursos em progresso</p>
                 </div>
                 <div className='contentDiv'>

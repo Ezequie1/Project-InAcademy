@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './style.css'
 import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import XIcon from '@mui/icons-material/X'
-import logo from '../../Images/Inmetrics-Logo.svg'
 import logoDark from '../../Images/logoIn.png'
 import { Link } from 'react-router-dom'
 

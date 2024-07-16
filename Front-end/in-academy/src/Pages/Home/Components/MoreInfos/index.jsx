@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useRef} from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import './style.css'
 import CircularProgress from '@mui/material/CircularProgress'
 import CheckIcon from '@mui/icons-material/Check'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import { Context } from '../../../../Context/authProvider'
+import { setImageUser } from '../../../../Service'
 
 export function ModalMoreInfos(){
     const [open, setOpen] = useState(false)
     const [step, setStep] = useState(1)
     const fileRef = useRef()
     const containerRef = useRef(null);
+    const { userData, reloadUserData } = useContext(Context)
     const [image, setImage] = useState({
         img: null,
         textButton: 'Escolher foto'
@@ -24,7 +27,7 @@ export function ModalMoreInfos(){
         }
 
         verifyIsFirstAccess()
-    },[])
+    }, [])
 
     function MoveStep(to){
         const elements = containerRef.current.querySelectorAll('.stepDiv')
@@ -74,16 +77,22 @@ export function ModalMoreInfos(){
             setImage({...image, textButton: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/> })
             const reader = new FileReader()
 
-            setTimeout(() =>{
+            let data = new FormData();
+            data.append('file', file, file.name);
+
+            setImageUser(
+                localStorage.getItem('t'),
+                data
+            ).then( () => {
                 reader.onloadend = () => setImage({ 
                     img: reader.result, 
                     textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> 
                 })
-
                 reader.readAsDataURL(file)
+                reloadUserData()
 
                 setTimeout(() => setImage( prevState => ({...prevState, textButton: 'Escolher foto'})), 1000)
-            }, 1000) 
+            }).catch( e => console.log(e.response.data))
         }
     }
 
@@ -99,7 +108,12 @@ export function ModalMoreInfos(){
             setInterval(() => setOffice( prevState => ({...prevState, textButton: 'Salvar' })), 1000)
         }, 1000)
     }
-    
+
+    function finish(){
+        setOpen(false)
+        localStorage.removeItem('first_access')
+    }
+
     return(
         <>
             <div className='modalMoreInfos' style={{ display: !open && 'none' }}>
@@ -118,10 +132,12 @@ export function ModalMoreInfos(){
                     <div className='stepDiv'>
                         <h2>Antes de começar</h2>
                         <p>Selecione uma foto para personalizar o ícone do seu perfil! </p>
-                        <div className='imageNameModalMoreInfos' style={{ backgroundImage: image.img && `url(${ image.img })` }}>
-                            { !image.img && 'E'}
-                            <span/>
-                        </div>
+                        { userData &&
+                            <div style={{ backgroundImage: image.img && `url(${ image.img })` }}>
+                                { !image.img && userData.name.split('')[0] }
+                                <span/>
+                            </div>
+                        }
                         <button onClick={() => fileRef.current.click()}>
                             <input id="upload" name="upload" type="file" ref={fileRef} hidden onChange={ e => changeImage(e.target.files[0])} />
                             { image.textButton }
@@ -146,8 +162,8 @@ export function ModalMoreInfos(){
                         voltar
                     </button>
                     <div>
-                        <p onClick={() => setOpen(false)}>Talvez depois</p>
-                        <button onClick={() => { step === 3 ? setOpen(false) : MoveStep(step === 3 ? 3 : step + 1) }}>
+                        <p onClick={() => finish()}>Talvez depois</p>
+                        <button onClick={() => { step === 3 ? finish() : MoveStep(step === 3 ? 3 : step + 1) }}>
                             { step === 3 ? 'Finalizar' : 'Próximo'}
                         </button>
                     </div>

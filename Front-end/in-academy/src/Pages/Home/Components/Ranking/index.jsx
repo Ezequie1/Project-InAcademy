@@ -16,7 +16,7 @@ export function Ranking(){
     const [ open, setOpen ] = useState('-18vw')
 
     const openRanking = () => {
-        open === '2vw' ? setOpen('-18vw') : setOpen('2vw');
+        open === '2vw' ? setOpen('-18vw') : setOpen('2vw')
     }
 
     const users = [
@@ -43,13 +43,10 @@ export function Ranking(){
                         <h1>{ user.nome }</h1>
                         <p>
                             { index < 3 ? 
-                                <>
-                                    <strong className={variation}>{ user.points }</strong>
-                                    pontos
-                                </>
+                                <><strong className={variation}>{ user.points }</strong> pontos</>
                                 :
-                                user.points + ' pontos '
-                            }
+                                user.points + ' pontos'
+                            } 
                         </p>
                     </div>
                 </div>

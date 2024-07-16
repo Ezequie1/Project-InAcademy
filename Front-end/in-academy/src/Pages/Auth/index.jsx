@@ -20,7 +20,7 @@ export function LoginPage(){
     const [ auth, setAuth ] = useState(true)
     const [ see, setSee ] = useState('password')
     const navigate = useNavigate()
-    const context = useContext(Context)
+    const { login } = useContext(Context)
     const [ buttonText, setButtonText ] = useState({
         auth: 'Entrar',
         sso: (<> <img src={ logoMicrosoft } alt=''/>Microsoft </>)
@@ -51,7 +51,7 @@ export function LoginPage(){
                 password: document.getElementById('password').value
             }).then( res => {
                 localStorage.setItem('t', res.data.token)
-                context.login()
+                login()
 
                 setTimeout(() => {
                     navigate('/home')
@@ -86,7 +86,7 @@ export function LoginPage(){
             }).then( res =>{
                 localStorage.setItem('t', res.data.token)
                 localStorage.setItem('first_access', true)
-                context.login()
+                login()
 
                 setTimeout(() => {
                     navigate('/home')

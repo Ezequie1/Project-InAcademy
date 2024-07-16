@@ -92,7 +92,8 @@ body{
     font-size: 2rem;
     display: grid;
     align-items: center;
-
+    background-position: center;
+    background-size: cover;
 }
 
 .sideNav{
@@ -276,6 +277,8 @@ body{
     font-size: 2.5rem;
     background-color: var(--blue);
     margin-top: 10px;
+    background-position: center;
+    background-size: cover;
 }
 
 .userInfosSideNav h1{
