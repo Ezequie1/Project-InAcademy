@@ -5,8 +5,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.in_academy.dto.OfficeRequestDTO;
 import project.in_academy.model.User;
 import project.in_academy.repository.UserRepository;
 
@@ -54,5 +56,14 @@ public class UserService {
         repository.save(user);
 
         return urlImage;
+    }
+
+    public User changeOffice(String office, String token) {
+        String email = tokenService.getSubject(token.replace("Bearer ", ""));
+        User user = repository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        user.setOffice(office);
+
+        return repository.save(user);
     }
 }

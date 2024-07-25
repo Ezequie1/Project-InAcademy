@@ -44,17 +44,13 @@ export function AuthProvider({ children }){
     }
 
     const reloadUserData = async () => {
-        getUserWithContext(
-            localStorage.getItem('t')
-        ).then( res => {
-            setUser(res.data)
-        })
+        getUserWithContext(localStorage.getItem('t')).then( res => setUser(res.data))
     }
 
     if(loading){ return <Loading/> }
 
     return(
-        <Context.Provider value={{ isUserAuth: isAuthenticated, userData: user, logout, login, reloadUserData }}>
+        <Context.Provider value={{ isUserAuth: isAuthenticated, userData: user, logout, login, reloadUserData, setUser }}>
             { children }
         </Context.Provider>
     )

@@ -4,21 +4,27 @@ import CircularProgress from '@mui/material/CircularProgress'
 import CheckIcon from '@mui/icons-material/Check'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { Context } from '../../../../Context/authProvider'
-import { setImageUser } from '../../../../Service'
+import Snackbar from '@mui/material/Snackbar'
+import { setImageUser, changeOffice } from '../../../../Service'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 
 export function ModalMoreInfos(){
     const [open, setOpen] = useState(false)
     const [step, setStep] = useState(1)
     const fileRef = useRef()
-    const containerRef = useRef(null);
-    const { userData, reloadUserData } = useContext(Context)
+    const containerRef = useRef(null)
+    const { userData, reloadUserData, setUser } = useContext(Context)
     const [image, setImage] = useState({
         img: null,
         textButton: 'Escolher foto'
     })
     const [ office, setOffice] = useState({
-        office: null,
+        value: null,
         textButton: 'Salvar'
+    })
+    const [openSnack, setSnack] = useState({ 
+        open: false,
+        message: ''
     })
 
     useEffect(() => {
@@ -80,33 +86,64 @@ export function ModalMoreInfos(){
             let data = new FormData();
             data.append('file', file, file.name);
 
-            setImageUser(
-                localStorage.getItem('t'),
-                data
-            ).then( () => {
+            setImageUser( localStorage.getItem('t'), data)
+            .then(() => {
                 reader.onloadend = () => setImage({ 
                     img: reader.result, 
                     textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> 
                 })
                 reader.readAsDataURL(file)
+
                 reloadUserData()
 
+                setSnack({ 
+                    open: true,
+                    message: <p className='stackText'><CheckIcon style={{color: 'green'}}/>Imagem alterada com sucesso!</p>
+                })
                 setTimeout(() => setImage( prevState => ({...prevState, textButton: 'Escolher foto'})), 1000)
-            }).catch( e => console.log(e.response.data))
+
+            }).catch(() => {
+                setTimeout(() => {
+                    setSnack({
+                        open: true,
+                        message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Não foi possível salvar sua imagem! Selecione outra.</p>
+                    })
+                    setImage( prevState => ({ ...prevState,
+                        textButton: 'Escolher foto' 
+                    }))
+                }, 1000)
+
+            })
         }
     }
 
     function saveOffice(){
         setOffice({ 
-            office: document.getElementById('actualOfficeInput').value, 
+            value: document.getElementById('actualOfficeInput').value, 
             textButton: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/> 
         })
 
-        setInterval(() => {
-            setOffice(prevState => ({...prevState, textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> }))
+        changeOffice(document.getElementById('actualOfficeInput').value).then( res => {
+            setUser(res.data)
 
-            setInterval(() => setOffice( prevState => ({...prevState, textButton: 'Salvar' })), 1000)
-        }, 1000)
+            setTimeout(() => {
+                setOffice(prevState => ({...prevState, textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> }))
+                setSnack({ 
+                    open: true,
+                    message: <p className='stackText'><CheckIcon style={{color: 'green'}}/>Cargo salvo com sucesso!</p>
+                })
+                setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
+            }, 1000)
+        }).catch(() => {
+            setTimeout(() => {
+                setOffice(prevState => ({...prevState, textButton: 'Erro ao salvar cargo' }))
+                setSnack({ 
+                    open: true,
+                    message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Erro ao tentar salvar seu cargo!</p>
+                })
+                setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
+            }, 1000)
+        })
     }
 
     function finish(){
@@ -170,6 +207,12 @@ export function ModalMoreInfos(){
                 </div>
             </div>
             <div className='backModal' style={{ display: !open && 'none' }} />  
+            <Snackbar
+                open={ openSnack.open }
+                autoHideDuration={ 3000 }
+                onClose={() => setSnack({...openSnack, open: false})}
+                message={ openSnack.message }
+            />
         </>
     )
 }

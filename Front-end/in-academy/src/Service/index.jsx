@@ -39,3 +39,13 @@ export async function setImageUser(token, imageData){
         }
     )
 }
+
+export async function changeOffice(office){
+    let token = localStorage.getItem('t')
+
+    return await api.put(
+        '/user/office',
+        { office: office },
+        { headers: { Authorization: `Bearer ${ token }` }}
+    )
+}
