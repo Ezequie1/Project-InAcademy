@@ -7,13 +7,17 @@ import { Footer } from './Components/Footer'
 import { AuthProvider } from './Context/authProvider'
 import { useContext } from 'react'
 import { Context } from './Context/authProvider'
+import { UserConfigPage } from './Pages/Config'
+import { ContextConfig } from './Context/configProvider'
 
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <AppContent/>
-      </BrowserRouter> 
+      <ContextConfig>
+        <BrowserRouter>
+          <AppContent/>
+        </BrowserRouter> 
+      </ContextConfig>
     </AuthProvider>
   )
 }
@@ -34,7 +38,7 @@ function AppContent(){
         <Route path="/membros" element={<PrivateRoute>Membros</PrivateRoute>}/>
         <Route path="/ranking" element={<PrivateRoute>Ranking</PrivateRoute>}/>
         <Route path="/notificacoes" element={<PrivateRoute>Notificacoes</PrivateRoute>}/>
-        <Route path="/configuracoes" element={<PrivateRoute>Configuracoes</PrivateRoute>}/>
+        <Route path="/configuracoes" element={<PrivateRoute><UserConfigPage/></PrivateRoute>}/>
         <Route path="/suporte" element={<PrivateRoute>Suporte</PrivateRoute>}/>
         <Route path="*" element={<Navigate to='/auth'/>}/>
       </Routes>

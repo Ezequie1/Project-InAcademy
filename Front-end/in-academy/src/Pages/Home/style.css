@@ -4,13 +4,15 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .welcomeDiv{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 60vw;
+    box-sizing: border-box;
+    width: clamp(400px, 90vw, 1152px);
 }
 
 .welcomeDiv h1{
@@ -29,11 +31,12 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 5px;
+    box-sizing: border-box;
+    width: clamp( 400px, calc(90vw + 48px), 1200px);
 }
 
 .inProgressCoursesDiv{
-    width: 60vw;
+    width: 100%;
     display: flex;
     overflow-x: scroll;
     gap: 10px;

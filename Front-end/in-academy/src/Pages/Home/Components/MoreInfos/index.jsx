@@ -4,9 +4,9 @@ import CircularProgress from '@mui/material/CircularProgress'
 import CheckIcon from '@mui/icons-material/Check'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { Context } from '../../../../Context/authProvider'
-import Snackbar from '@mui/material/Snackbar'
 import { setImageUser, changeOffice } from '../../../../Service'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import { ConfigContext } from '../../../../Context/configProvider'
 
 export function ModalMoreInfos(){
     const [open, setOpen] = useState(false)
@@ -14,6 +14,7 @@ export function ModalMoreInfos(){
     const fileRef = useRef()
     const containerRef = useRef(null)
     const { userData, reloadUserData, setUser } = useContext(Context)
+    const { setSnack } = useContext(ConfigContext)
     const [image, setImage] = useState({
         img: null,
         textButton: 'Escolher foto'
@@ -21,10 +22,6 @@ export function ModalMoreInfos(){
     const [ office, setOffice] = useState({
         value: null,
         textButton: 'Salvar'
-    })
-    const [openSnack, setSnack] = useState({ 
-        open: false,
-        message: ''
     })
 
     useEffect(() => {
@@ -123,27 +120,38 @@ export function ModalMoreInfos(){
             textButton: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/> 
         })
 
-        changeOffice(document.getElementById('actualOfficeInput').value).then( res => {
-            setUser(res.data)
-
-            setTimeout(() => {
-                setOffice(prevState => ({...prevState, textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> }))
-                setSnack({ 
-                    open: true,
-                    message: <p className='stackText'><CheckIcon style={{color: 'green'}}/>Cargo salvo com sucesso!</p>
-                })
-                setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
-            }, 1000)
-        }).catch(() => {
-            setTimeout(() => {
-                setOffice(prevState => ({...prevState, textButton: 'Erro ao salvar cargo' }))
-                setSnack({ 
-                    open: true,
-                    message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Erro ao tentar salvar seu cargo!</p>
-                })
-                setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
-            }, 1000)
-        })
+        if(office.value !== '' && office.value !== null){
+            changeOffice(document.getElementById('actualOfficeInput').value).then( res => {
+                setUser(res.data)
+    
+                setTimeout(() => {
+                    setOffice(prevState => ({...prevState, textButton: <CheckIcon style={{ height: "30px", width: "30px", color: "#000" }}/> }))
+                    setSnack({ 
+                        open: true,
+                        message: <p className='stackText'><CheckIcon style={{color: 'green'}}/>Cargo salvo com sucesso!</p>
+                    })
+                    setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
+                }, 1000)
+            }).catch(() => {
+                setTimeout(() => {
+                    setOffice(prevState => ({...prevState, textButton: 'Erro ao salvar cargo' }))
+                    setSnack({ 
+                        open: true,
+                        message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Erro ao tentar salvar seu cargo!</p>
+                    })
+                    setOffice( prevState => ({...prevState, textButton: 'Salvar' }))
+                }, 1000)
+            })
+        }else{
+            setOffice({ 
+                value: document.getElementById('actualOfficeInput').value, 
+                textButton: 'Salvar' 
+            })
+            setSnack({
+                open: true,
+                message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>O campo não pode ser vazio.</p>
+            })
+        }
     }
 
     function finish(){
@@ -207,12 +215,6 @@ export function ModalMoreInfos(){
                 </div>
             </div>
             <div className='backModal' style={{ display: !open && 'none' }} />  
-            <Snackbar
-                open={ openSnack.open }
-                autoHideDuration={ 3000 }
-                onClose={() => setSnack({...openSnack, open: false})}
-                message={ openSnack.message }
-            />
         </>
     )
 }

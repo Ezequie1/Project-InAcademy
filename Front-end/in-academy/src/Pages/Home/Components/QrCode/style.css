@@ -7,9 +7,10 @@
     border-radius: 5px;
     background-color: #000;
     color: #fff;
-    width: 10vw;
+    width: clamp(180px, 100%, 192px);
     transition: 0.5s ease-in-out;
     cursor: pointer;
+    z-index: 8;
 }
 
 .divQr div{

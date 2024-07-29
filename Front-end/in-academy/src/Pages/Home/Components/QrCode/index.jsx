@@ -4,9 +4,9 @@ import QrImage from '../../../../Images/qrcode.png'
 import './style.css'
 
 export function QrCode(){
-    const [ position, setPosition ] = useState('-7.3vw')
+    const [ position, setPosition ] = useState('-147px')
 
-    const seeQr = () => position === '-7.3vw' ? setPosition('1vw') : setPosition('-7.3vw')
+    const seeQr = () => position === '-147px' ? setPosition('15px') : setPosition('-147px')
 
     return(
         <div className='divQr' onClick={seeQr} style={{left: position}}>

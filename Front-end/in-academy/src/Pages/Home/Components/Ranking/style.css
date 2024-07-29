@@ -8,7 +8,8 @@
     justify-content: center;
     cursor: pointer;
     position: absolute;
-    right: 5vw;
+    right: 6vw;
+    z-index: 3;
     top: 35%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -19,11 +20,12 @@
 }
 
 .rankingDiv{
-    width: 16vw;
+    width: 310px;
     background-color: var(--backgroundColor);
     position: fixed;
+    z-index: 5;
     transition: 0.5s ease-in-out;
-    top: 18%;
+    top: 15%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -134,4 +136,10 @@
 .youRank{
     background-color: var(--backgroundSecondary);
     margin-bottom: 10px;
+}
+
+@media(max-width: 900px){
+    .rankingFloat{
+        display: none;
+    }
 }

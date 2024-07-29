@@ -1,6 +1,6 @@
 .cardInProgress{
-    min-width: 22vw;
-    width: 22vw;
+    min-width: 420px;
+    width: 420px;
     border-radius: 5px;
     background-color: var(--backgroundColor);
     border: 1px solid var(--border);
@@ -22,7 +22,7 @@
 }
 
 .infosCardProgress img{
-    width: 10vw;
+    width: 190px;
     border-radius: 3px;
 }
 

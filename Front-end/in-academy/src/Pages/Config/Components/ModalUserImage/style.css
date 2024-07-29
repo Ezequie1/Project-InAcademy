@@ -1,0 +1,99 @@
+.maskChangeUserImage{
+    position: fixed;
+    height: 100vw;
+    width: 100%;
+    z-index: 2;
+    background-color: #0000004f;
+}
+
+.modalChangeUserImage{
+    position: fixed;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(300px, 100%, 450px);
+    background-color: var(--blue);
+    border-radius: 10px;
+    background-color: var(--backgroundColor);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px 20px 40px 20px;
+}
+
+.arrowDivModalChangeUserImage{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.arrowDivModalChangeUserImage svg{
+    cursor: pointer;
+}
+
+.divImageUserModalChange{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-color: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+    position: relative;
+    margin: 40px 0px 40px 0px;
+    background-position: center;
+    background-size: cover;
+}
+
+.divImageUserModalChange span{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    animation: pulse 2s infinite;
+    right: 15px;
+    bottom: 15px;
+    background-color: green;
+    border-radius: 50%;
+}
+
+.modalChangeUserImage h3{
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--title);
+}
+
+.modalChangeUserImage p{
+    font-size: 1rem;
+    margin: 0;
+    color: var(--subtitle);
+}
+
+.textSelectImage{
+    font-size: 1rem;
+    margin: 0;
+    color: var(--blue);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: none;
+    background-color: transparent;
+}
+
+.buttonSaveImage{
+    width: 60%;
+    height: 35px;
+    background-color: var(--yellow);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

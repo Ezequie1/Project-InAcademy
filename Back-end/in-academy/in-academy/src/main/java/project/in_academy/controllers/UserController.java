@@ -27,7 +27,6 @@ public class UserController {
 
     @PutMapping("/office")
     public ResponseEntity<User> changeOffice(@RequestBody OfficeRequestDTO newOffice, @RequestHeader("Authorization") String token) {
-        System.out.println(newOffice);
         return ResponseEntity.ok().body(service.changeOffice(newOffice.office(), token));
     }
 }

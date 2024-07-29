@@ -13,10 +13,10 @@ import Thales from './Images/ThalesMateus.png'
 import UserImg from './Images/imgUser.jpg'
 
 export function Ranking(){
-    const [ open, setOpen ] = useState('-18vw')
+    const [ open, setOpen ] = useState('-400px')
 
     const openRanking = () => {
-        open === '2vw' ? setOpen('-18vw') : setOpen('2vw')
+        open === '20px' ? setOpen('-400px') : setOpen('20px')
     }
 
     const users = [

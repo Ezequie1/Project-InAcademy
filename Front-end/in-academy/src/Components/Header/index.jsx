@@ -22,11 +22,13 @@ import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import { Link, useLocation } from 'react-router-dom'
 import { Context } from '../../Context/authProvider'
+import { ConfigContext } from '../../Context/configProvider'
+import CheckIcon from '@mui/icons-material/Check'
 
 export function Header(){
     const { userData, logout } = useContext(Context)
-    const [ open, setOpen ] = useState({ side: '-25vw', mask: '0', index: '-3'})
-    const [ isLight, setTheme ] = useState('1%')
+    const { theme, changeTheme, setSnack } = useContext(ConfigContext)
+    const [ open, setOpen ] = useState({ side: '-500px', mask: '0', index: '-3'})
     const [ selected, setSelected ] = useState('home')
     const location = useLocation()
 
@@ -40,22 +42,11 @@ export function Header(){
         // eslint-disable-next-line
     }, [location.pathname])
 
-    console.log(userData)
-
     const moveSideNav = () => {
         if(open.side === '0'){
-            setOpen({ side: '-25vw', mask: '0', index:'-3'})
+            setOpen({ side: '-500px', mask: '0', index:'-3'})
         }else{
             setOpen({ side: '0', mask: '0.3', index:'10'})
-        }
-    }
-
-    const changeTheme = (position) => {
-        if(position !== isLight){
-            let element = document.querySelector('body')
-            
-            position === '51%' ? element.setAttribute('data-theme', 'dark') : element.setAttribute('data-theme', 'light')
-            setTheme(position)
         }
     }
 
@@ -112,45 +103,45 @@ export function Header(){
                         <ArrowBackIosNewRoundedIcon onClick={moveSideNav} className='icon'/>
                     </div>
                     <section className='contentItensNav'>
-                        <Link to='/home' style={{textDecoration: 'none'}}>
+                        <Link to='/home' onClick={moveSideNav}>
                             <div className='item sectedSideNav' id='home'>
                                 <HomeOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Home
                             </div>
                         </Link>
-                        <Link to='/meu-aprendizado' style={{textDecoration: 'none'}}>
+                        <Link to='/meu-aprendizado' onClick={moveSideNav}>
                             <div className='item' id='meu-aprendizado'>
                                 <SchoolOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Meu aprendizado
                             </div>
                         </Link>
-                        <Link to='/comunidades' style={{textDecoration: 'none'}}>
+                        <Link to='/comunidades' onClick={moveSideNav}>
                             <div className='item' id='comunidades'>
                                 <PublicOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Comunidades
                                 <span>1</span>
                             </div>
                         </Link>
-                        <Link to='/todos-os-cursos' style={{textDecoration: 'none'}}>
+                        <Link to='/todos-os-cursos' onClick={moveSideNav}>
                             <div className='item' id='todos-os-cursos'>
                                 <AutoStoriesOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Todos os cursos
                                 <span>3</span>
                             </div>
                         </Link>
-                        <Link to='/membros' style={{textDecoration: 'none'}}>
+                        <Link to='/membros' onClick={moveSideNav}>
                             <div className='item' id='membros'>
                                 <Groups2OutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Membros
                             </div>
                         </Link>
-                        <Link to='/ranking' style={{textDecoration: 'none'}}>
+                        <Link to='/ranking' onClick={moveSideNav}>
                             <div className='item' id='ranking'>
                                 <EmojiEventsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Ranking
                             </div>
                         </Link>
-                        <Link to='/notificacoes' style={{textDecoration: 'none'}}>
+                        <Link to='/notificacoes' onClick={moveSideNav}>
                             <div className='item' id='notificacoes'>
                                 <NotificationsNoneOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Notificações
@@ -158,13 +149,13 @@ export function Header(){
                             </div>
                         </Link>
                         <hr/>
-                        <Link to='/configuracoes' style={{textDecoration: 'none'}}>
+                        <Link to='/configuracoes' onClick={moveSideNav}>
                             <div className='item' id='configuracoes'>
                                 <SettingsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Configurações
                             </div>
                         </Link>
-                        <Link to='/suporte' style={{textDecoration: 'none'}}>
+                        <Link to='/suporte' onClick={moveSideNav}>
                             <div className='item' id='suporte'>
                                 <HelpOutlineOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
                                 Suporte
@@ -174,12 +165,12 @@ export function Header(){
                 </section>
                 <section className='downSideNav'>
                     <div className='divTheme'>
-                        <span style={{left: isLight}}></span>
-                        <p onClick={() => changeTheme('1%')}>
-                            <LightModeOutlinedIcon style={{color: isLight === '1%' ? '#ffca00' : '#ccc'}}/>Claro
+                        <span style={{left: theme === 'light' ? '1%' : '51%'}}></span>
+                        <p onClick={() => changeTheme('light')}>
+                            <LightModeOutlinedIcon style={{color: theme === 'light' ? '#ffca00' : '#ccc'}}/>Claro
                         </p>
-                        <p onClick={() => changeTheme('51%')}>
-                            <NightsStayOutlinedIcon style={{color: isLight === '51%' ? '#009ce0' : '#ccc'}}/> Escuro
+                        <p onClick={() => changeTheme('dark')}>
+                            <NightsStayOutlinedIcon style={{color: theme === 'dark' ? '#009ce0' : '#ccc'}}/> Escuro
                         </p>
                     </div>
                     <div className='userInfosSideNav'>
@@ -196,7 +187,13 @@ export function Header(){
                                     <ContentCopyRoundedIcon 
                                         fontSize='0.2rem' 
                                         style={{cursor: 'pointer'}} 
-                                        onClick={ ()  => navigator.clipboard.writeText(document.getElementById("emailInfoId").innerText)}
+                                        onClick={ ()  => {
+                                            navigator.clipboard.writeText(document.getElementById("emailInfoId").innerText)
+                                            setSnack({
+                                                open: true,
+                                                message: <p className='stackText'><CheckIcon style={{color: 'green'}}/>Copiado para a área de transferência!</p>
+                                            })
+                                        }}
                                     />
                                 </p>
                             </>

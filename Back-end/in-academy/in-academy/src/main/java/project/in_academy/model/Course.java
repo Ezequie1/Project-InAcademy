@@ -27,6 +27,8 @@ public class Course {
     @NotNull
     private String description;
     @NotNull
+    private String urlImageCourse;
+    @NotNull
     private String authorName;
     private int coursePoints;
     private int totalHours;

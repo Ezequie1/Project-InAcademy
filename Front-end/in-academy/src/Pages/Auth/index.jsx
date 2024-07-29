@@ -10,10 +10,10 @@ import { particles } from '../../static/variables'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { register, sign } from '../../Service'
-import Snackbar from '@mui/material/Snackbar'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../../Context/authProvider'
+import { ConfigContext } from '../../Context/configProvider'
 
 export function LoginPage(){
     const particlesInit = useCallback( async engine => await loadSlim(engine), [])
@@ -21,14 +21,10 @@ export function LoginPage(){
     const [ see, setSee ] = useState('password')
     const navigate = useNavigate()
     const { login } = useContext(Context)
+    const { setSnack } = useContext(ConfigContext)
     const [ buttonText, setButtonText ] = useState({
         auth: 'Entrar',
         sso: (<> <img src={ logoMicrosoft } alt=''/>Microsoft </>)
-    })
-
-    const [openSnack, setSnack] = useState({ 
-        open: false,
-        message: ''
     })
 
     const changePasswordVisibility = () => {
@@ -42,13 +38,29 @@ export function LoginPage(){
         setAuth(!auth)
     } 
 
+    const loginSSO = () => {
+        setButtonText({...buttonText, sso: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/> })
+
+        setTimeout(() => {
+            setSnack({
+                open: true,
+                message: <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Indisponível no momento, tente novamente mais tarde!</p>
+            })
+
+            setButtonText({...buttonText, sso: <><img src={ logoMicrosoft } alt=''/>Microsoft </> })
+        }, 1000)
+    }
+
     function sendForm(){
         setButtonText({...buttonText, auth: <CircularProgress style={{ height: "25px", width: "25px", color: "#000" }}/>})
 
-        if(auth){
+        let email = document.getElementById('email').value
+        let password = document.getElementById('password').value
+
+        if(auth && email !== '' && password !== ''){
             sign({
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value
+                email: email,
+                password: password
             }).then( res => {
                 localStorage.setItem('t', res.data.token)
                 login()
@@ -58,7 +70,7 @@ export function LoginPage(){
                     setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
                 }, 1000)
             }).catch( err => {
-                if(err.response.status === 400){
+                if(err.response.status === 403){
 
                     setTimeout(() => {
                         setSnack({
@@ -78,11 +90,11 @@ export function LoginPage(){
                     }, 1000)
                 }
             })
-        }else{
+        }else if(!auth && document.getElementById('nome').value !== '' &&  email !== '' && password !== ''){
             register({
                 name: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value
+                email: email,
+                password: password
             }).then( res =>{
                 localStorage.setItem('t', res.data.token)
                 localStorage.setItem('first_access', true)
@@ -111,6 +123,12 @@ export function LoginPage(){
                         setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se' })
                     }, 1000)
                 }
+            })
+        }else{
+            setButtonText({...buttonText, auth: auth ? 'Entrar' : 'Cadastre-se'})
+            setSnack({
+                open: true,
+                message:  <p className='stackText'><ErrorOutlineIcon style={{color: 'red'}}/>Preencha todos os campos!</p>
             })
         }
     }
@@ -156,18 +174,12 @@ export function LoginPage(){
                         <p>Ou</p>
                         <span/>
                     </div>
-                    <button className='microsoftButton'>
-                        { buttonText.sso}
+                    <button className='microsoftButton' onClick={loginSSO}>
+                        { buttonText.sso }
                     </button>
                 </div>
                 <img src={ logo } className='inmetricsLogo' type="image/svg+xml" alt=''/>
             </div>
-            <Snackbar
-                open={ openSnack.open }
-                autoHideDuration={ 3000 }
-                onClose={() => setSnack({...openSnack, open: false})}
-                message={ openSnack.message }
-            />
         </>
     )
 }

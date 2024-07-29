@@ -101,7 +101,7 @@ body{
     background-color: var(--backgroundColor);
     z-index: 10;
     top: 0;
-    width: 20vw;
+    width: clamp(350px, 100%, 384px);
     height: 96vh;
     margin: 2vh 0px 2vh 2vh;
     border-radius: 10px;
@@ -171,6 +171,10 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.contentItensNav a{
+    text-decoration: none;
+}   
 
 .item{
     transition: 0.1s ease-in-out;
@@ -333,7 +337,6 @@ body{
 .sectedSideNav svg{
     color: var(--blue);
 }
-
 
 @keyframes pulse{
     0% {

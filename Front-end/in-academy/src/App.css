@@ -20,11 +20,13 @@
   --borderInputSearch: #b5b5b5;
   --backgroundQrCode: #252525;
   --colorQrCode: #fff;
+  --lowOpacityBlue: #009de075;
+  --lowOpacityYellow: #ffcc0070;
 }
 
 [data-theme="dark"]{
   --blue: #009ce0;
-  --lightBlue: #009de041;
+  --lightBlue: #009de02a;
   --yellow: #ffca00;
   --green: green;
   --bronze: #cd7f32;
@@ -37,6 +39,8 @@
   --subtitle: #999999;
   --borderLight: #a5a5a5;
   --shadow: #252525;
+  --lowOpacityBlue: #009de02a;
+  --lowOpacityYellow: #ffcc0070;
 }
 
 body {
