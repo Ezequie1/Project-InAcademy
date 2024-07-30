@@ -208,3 +208,22 @@ export const courses = [
     rating: 2.3
   }
 ]
+
+export const generateRandomColor = () => {
+  const colors = [
+    '#FFB6C1',
+    '#ADD8E6',
+    '#90EE90',
+    '#FFFFE0',
+    '#DDA0DD',
+    '#FFD700',
+    '#FFA07A',
+    '#F08080',
+    '#E6E6FA',
+    '#FFE4B5' 
+  ]
+
+  let number = Math.floor(Math.random() * 10)
+
+  return colors[number]
+}

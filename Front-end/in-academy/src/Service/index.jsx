@@ -49,3 +49,30 @@ export async function changeOffice(office){
         { headers: { Authorization: `Bearer ${ token }` }}
     )
 }
+
+export async function getTopUsersRanking(){
+    let token = localStorage.getItem('t')
+
+    return await api.get(
+        '/user/ranking',
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}
+
+export async function setStatusIsOnlineTrue(){
+    let token = localStorage.getItem('t')
+
+    return await api.get(
+        '/user/online/true',
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}
+
+export async function setStatusIsOnlineFalse(){
+    let token = localStorage.getItem('t')
+
+    return await api.get(
+        '/user/online/false',
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}

@@ -32,30 +32,32 @@
     flex-direction: column;
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-sizing: border-box;
+    padding: 20px 10px 10px 10px;
 }
 
-.arrowBackRank{
+.arrowBackRankDiv{
     display: flex;
-    width: 90%;
-    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    color: var(--title);
 }
 
-.arrowBackRank svg{
-    color: var(--title);
+.arrowBackRankDiv svg{
     cursor: pointer;
+    position: absolute;
+    left: 10px;
 }
 
-.rankingDiv h1{
-    color: var(--title);
+.arrowBackRankDiv h1{
     font-size: 1.5rem;
     margin: 0;
-    margin-left: -10px;
 }
 
 .contentRanking{
-    width: 95%;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -64,12 +66,66 @@
     margin-top: 20px;
 }
 
+.contentRanking a{
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .contentRanking span{
     font-weight: bold;
     color: var(--blue);
     font-size: 0.8rem;
     cursor: pointer;
     margin: 10px 0px 10px 0px;
+}
+
+.infoAndUserImage{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.imageUserDivInRanking{
+    border-radius: 50%;
+    margin: 5px;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    color: #000;
+    position: relative;
+}
+
+.imageUserDivInRanking span{
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    right: -4px;
+    bottom: -8px;
+    background-color: green;
+    border-radius: 50%;
+    border: 2px solid var(--backgroundColor);
+}
+
+.userRankingInfoDiv{
+    width: 100%;
+    overflow: hidden;
+}
+
+.userRankingInfoDiv h1{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .itemRank{
@@ -83,25 +139,6 @@
 
 .itemRank:hover{
     background-color: var(--backgroundSecondary);
-}
-
-.infoAndUserImage{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-
-.infoAndUserImage div{
-    width: 9vw;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.itemRank img{
-    border-radius: 50%;
-    margin: 5px;
-    height: 3.5rem;
-    width: 3.5rem;
 }
 
 .itemRank h1{
@@ -135,7 +172,6 @@
 
 .youRank{
     background-color: var(--backgroundSecondary);
-    margin-bottom: 10px;
 }
 
 @media(max-width: 900px){

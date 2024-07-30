@@ -52,12 +52,11 @@
 
 .divImageUserModalChange span{
     position: absolute;
-    height: 30px;
-    width: 30px;
-    animation: pulse 2s infinite;
-    right: 15px;
-    bottom: 15px;
-    background-color: green;
+    height: 35px;
+    width: 35px;
+    right: 10px;
+    bottom: 10px;
+    border: 3px solid var(--backgroundColor);
     border-radius: 50%;
 }
 

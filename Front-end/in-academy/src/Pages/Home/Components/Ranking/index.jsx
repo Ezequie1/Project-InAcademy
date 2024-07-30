@@ -1,33 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './style.css'
 import Cup from '../../../../Images/trofeu.png'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
-import EduardoMenezes from './Images/eduardoMenezes.png'
-import Franklin from './Images/Franklin.png'
-import Gustavo from './Images/gustavoSantana.png'
-import Hugo from './Images/HugoDeJesus.png'
-import JoseLuiz from './Images/JoseLuiz.png'
-import JoseNildo from './Images/JoseNildo.png'
-import Thales from './Images/ThalesMateus.png'
-import UserImg from './Images/imgUser.jpg'
+import { Link } from 'react-router-dom'
+import { DataContext } from '../../../../Context/dataProvider'
+import { Context } from '../../../../Context/authProvider'
+import { generateRandomColor } from '../../../../static/variables'
 
 export function Ranking(){
     const [ open, setOpen ] = useState('-400px')
-
+    const { topUsersRanking } = useContext(DataContext)
+    const { userData } = useContext(Context)
     const openRanking = () => {
         open === '20px' ? setOpen('-400px') : setOpen('20px')
     }
-
-    const users = [
-        { nome: 'Eduardo Menezes', points: 690, img: EduardoMenezes },
-        { nome: 'Franklin', points: 630, img: Franklin },
-        { nome: 'Gustavo Santana', points: 610, img: Gustavo },
-        { nome: 'Hugo de Jesus', points: 500, img: Hugo },
-        { nome: 'José Luiz', points: 480, img: JoseLuiz },
-        { nome: 'José Nildo', points: 450, img: JoseNildo },
-        { nome: 'Thales Mateus', points: 440, img: Thales },
-    ]
 
     const RenderUsers = (user, index) => {
         let variation = 'gold'
@@ -36,22 +23,27 @@ export function Ranking(){
         if(index === 2) variation = 'bronze' 
 
         return(
-            <div className='itemRank' key={ index }>
-                <div className='infoAndUserImage'>
-                    <img src={ user.img } alt=""/>
-                    <div>
-                        <h1>{ user.nome }</h1>
-                        <p>
-                            { index < 3 ? 
-                                <><strong className={variation}>{ user.points }</strong> pontos</>
-                                :
-                                user.points + ' pontos'
-                            } 
-                        </p>
+            <Link to={'/ranking/' + user.userId}>
+                <div className='itemRank' key={ index }>
+                    <div className='infoAndUserImage'>
+                        <div className='imageUserDivInRanking' style={{backgroundImage: `url(${ user.urlImageUser })`, backgroundColor: generateRandomColor() }}>
+                            { !user.urlImageUser && user.name.split('')[0] }
+                            { user.isOnline && <span/> }
+                        </div>
+                        <div className='userRankingInfoDiv'>
+                            <h1>{ user.name }</h1>
+                            <p>
+                                { index < 3 ? 
+                                    <><strong className={variation}>{ user.userPoints }</strong> pontos</>
+                                    :
+                                    user.userPoints + ' pontos'
+                                } 
+                            </p>
+                        </div>
                     </div>
+                    { index < 3 && <EmojiEventsRoundedIcon fontSize='large' className={variation}/>}
                 </div>
-                { index < 3 && <EmojiEventsRoundedIcon fontSize='large' className={variation}/>}
-            </div>
+            </Link> 
         )
     }
 
@@ -61,21 +53,29 @@ export function Ranking(){
                 <img src={ Cup } alt='' />
             </div>
             <div className='rankingDiv' style={{ right: open }}>
-                <div className='arrowBackRank'>
+                <div className='arrowBackRankDiv'>
                     <ArrowForwardIosRoundedIcon onClick={openRanking}/>
                     <h1>Melhores</h1>
-                    <span></span>
                 </div>
                 <section className='contentRanking'>
-                    { users.map((item, index) => RenderUsers(item, index))}
-                    <span>Ver mais</span>
+                    { topUsersRanking.map((item, index) => RenderUsers(item, index))}
+                    <span>
+                        <Link to='/ranking' style={{color: 'var(--blue)'}}>Ver mais</Link>
+                    </span>
                     <div className='itemRank youRank'>
                         <div className='infoAndUserImage'>
-                            <img src={ UserImg } alt=""/>
-                            <div>
-                                <h1>Ezequiel Alves</h1>
-                                <p>415 pontos</p>
-                            </div>
+                            { userData !== null &&
+                                <>
+                                    <div className='imageUserDivInRanking' style={{backgroundImage: `url(${ userData !== null && userData.urlImageUser })`}}>
+                                        { !userData.urlImageUser && userData.name.split('')[0] }
+                                        <span/>
+                                    </div>
+                                    <div>
+                                        <h1>{ userData.name }</h1>
+                                        <p><strong>{ userData.userPoints } </strong> pontos</p>
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </section>

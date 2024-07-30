@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getUserWithContext } from '../Service'
+import { getUserWithContext, setStatusIsOnlineFalse, setStatusIsOnlineTrue } from '../Service'
 import { Loading } from '../Components/Loading'
 
 export const Context = createContext()
@@ -14,11 +14,12 @@ export function AuthProvider({ children }){
             let token = localStorage.getItem('t')
 
             if(token){
-                await getUserWithContext(token).then( res => {
-                    setUser(res.data)
-                    setAuthenticated(true)
-                    setLoading(false)
-
+                await setStatusIsOnlineTrue().then(() => {
+                    getUserWithContext(token).then( res =>{
+                        setUser(res.data)
+                        setAuthenticated(true)
+                        setLoading(false)
+                    })
                 }).catch(() => {
                     setAuthenticated(false)
                     setLoading(false)
@@ -32,15 +33,21 @@ export function AuthProvider({ children }){
         isLoged()
     }, [])
 
+    window.addEventListener('beforeunload', function () {
+        setStatusIsOnlineFalse()
+    })
+
     const logout = () => {
-        localStorage.removeItem('t')
-        setAuthenticated(false)
-        setUser(null)
+        setStatusIsOnlineFalse().then(() => {
+            localStorage.removeItem('t')
+            setAuthenticated(false)
+            setUser(null)
+        })
     }
 
     const login = () => {
         setAuthenticated(true)
-        reloadUserData()
+        setStatusIsOnlineTrue().then(() => reloadUserData())
     }
 
     const reloadUserData = async () => {

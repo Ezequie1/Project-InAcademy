@@ -40,12 +40,11 @@
 
 .spaceContentInfosUser div:first-child div span{
     position: absolute;
-    height: 30px;
-    width: 30px;
-    animation: pulse 2s infinite;
+    height: 35px;
+    width: 35px;
     right: 10px;
     bottom: 10px;
-    background-color: green;
+    border: 3px solid var(--backgroundColor);
     border-radius: 50%;
 }
 

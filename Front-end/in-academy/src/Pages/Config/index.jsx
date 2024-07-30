@@ -76,7 +76,7 @@ export function UserConfigPage(){
                     <div>
                         <div style={{ backgroundImage: `url(${ userData.urlImageUser })`}}>
                             { !userData.urlImageUser && userData.name.split('')[0] }
-                            <span></span>
+                            <span style={{ backgroundColor: userData.isOnline ? 'green' : 'var(--borderLight)'}}></span>
                         </div>
                         <div className='divInfosUserConfigPage'>
                             <h3>{ userData.name }</h3>

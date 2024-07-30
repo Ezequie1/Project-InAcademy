@@ -82,9 +82,14 @@ export function Header(){
                     { userData ? 
                         <>
                             {userData.urlImageUser !== null ? 
-                                <div style={{backgroundImage: `url(${ userData.urlImageUser })`}} className='imageUserDiv'></div>
+                                <div style={{backgroundImage: `url(${ userData.urlImageUser })`}} className='imageUserDiv'>
+                                    <span style={{ backgroundColor: userData.isOnline ? 'green' : 'var(--borderLight)'}}/>
+                                </div>
                                 :
-                                <div className='imageUserDiv'>{ userData.name.split('')[0] }</div>  
+                                <div className='imageUserDiv'>
+                                    { userData.name.split('')[0] }
+                                    <span style={{ backgroundColor: userData.isOnline ? 'green' : 'var(--borderLight)'}}/>
+                                </div>  
                             }
                         </>
                         :
@@ -181,7 +186,7 @@ export function Header(){
                                     :
                                     <div> { userData.name.split('')[0] } </div>
                                 }
-                                <h1>{ userData.name }<span></span></h1>
+                                <h1>{ userData.name }<span style={{ backgroundColor: userData.isOnline ? 'green' : 'var(--borderLight)'}}></span></h1>
                                 <p id="emailInfoId">
                                     { userData.email } 
                                     <ContentCopyRoundedIcon 

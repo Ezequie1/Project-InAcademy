@@ -51,7 +51,7 @@ export function ChangeUserImageModal({ open, setOpen }){
                 <p className='subtitle'>Selecione uma imagem como foto de perfil</p>
                 <div className='divImageUserModalChange' style={{backgroundImage: `url(${userData.urlImageUser})`}}>
                     { !userData.urlImageUser && userData.name.split('')[0] }
-                    <span/>
+                    <span style={{ backgroundColor: userData.isOnline ? 'green' : 'var(--borderLight)'}}/>
                 </div>
                 <button className='textSelectImage' onClick={() => fileRef.current.click()}>
                     <input id="upload" name="upload" type="file" ref={fileRef} hidden onChange={ e => changeImage(e.target.files[0])} />

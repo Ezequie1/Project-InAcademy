@@ -9,10 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.in_academy.dto.OfficeRequestDTO;
+import project.in_academy.dto.UsersRankingResponse;
 import project.in_academy.model.User;
 import project.in_academy.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -65,5 +68,33 @@ public class UserService {
         user.setOffice(office);
 
         return repository.save(user);
+    }
+
+    public List<UsersRankingResponse> getRanking() {
+        List<User> users = repository.findTopSevenUsers().orElseThrow(() -> new RuntimeException("Não foram encontrados usuários!")).stream().limit(7).toList();
+        List<UsersRankingResponse> responseUsers = new ArrayList<>();
+
+        users.forEach( user ->
+            responseUsers.add(
+                new UsersRankingResponse(
+                        user.getUserId(),
+                        user.getName(),
+                        user.getUserPoints(),
+                        user.getUrlImageUser(),
+                        user.getIsOnline()
+                )
+            )
+        );
+
+        return responseUsers;
+    }
+
+    public void setStatus(boolean status, String token){
+        String email = tokenService.getSubject(token.replace("Bearer ", ""));
+        User user = repository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        user.setIsOnline(status);
+
+        repository.save(user);
     }
 }
