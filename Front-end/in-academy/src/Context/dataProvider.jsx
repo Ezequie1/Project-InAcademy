@@ -13,26 +13,15 @@ export function DataProviderContext({ children }){
 
     useEffect(() => {
         function loadData(){
-            getTopUsersRanking().then( res => {
-                setTopUsersRanking(res.data)
-            })
+            getAllCoursesEnrolled().then( res => setInProgressCourses(res.data))
 
-            getAllCoursesEnrolled().then( res => {
-                setInProgressCourses(res.data)
-                console.log(res.data)
-            })
+            getAllRecentlyAddedCourses().then( res => setRecentlyAddedCourses(res.data))
 
-            getAllRecentlyAddedCourses().then( res => {
-                setRecentlyAddedCourses(res.data)
-            })
+            getCoursesByCategory().then( res => setCoursesByCategory(res.data))
 
-            getCoursesByCategory().then( res => {
-                setCoursesByCategory(res.data)
-            })
+            getAllCourses().then( res => setAllCourses(res.data))
 
-            getAllCourses().then( res => {
-                setAllCourses(res.data)
-            })
+            getTopUsersRanking().then( res => setTopUsersRanking(res.data))
         }
 
         loadData()

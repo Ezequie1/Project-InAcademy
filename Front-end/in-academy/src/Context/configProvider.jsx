@@ -14,18 +14,22 @@ export function ContextConfig({ children }){
     const changeTheme = (to) => {
         if(to === 'dark'){
             element.setAttribute('data-theme', 'dark')
+            localStorage.setItem('dt', 'dark')
             setTheme('dark')
         }else{
             element.setAttribute('data-theme', 'light')
+            localStorage.setItem('dt', 'light')
             setTheme('light')
         }            
     }
 
     useEffect(() => {
         function getTheme(){
-            element.getAttribute('data-theme') === null ? 
-                setTheme('light'):
-                setTheme('dark') 
+            if(localStorage.getItem('dt') === 'dark'){
+                changeTheme('dark') 
+            }else{
+                changeTheme('light')
+            }
         }
 
         getTheme()

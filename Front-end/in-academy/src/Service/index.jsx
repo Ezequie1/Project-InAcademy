@@ -113,3 +113,11 @@ export async function getAllCourses(){
     )
 }
 
+export async function searchCourse(query){
+    let token = localStorage.getItem('t')
+
+    return await api.get(
+        '/course/search/' + query,
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}

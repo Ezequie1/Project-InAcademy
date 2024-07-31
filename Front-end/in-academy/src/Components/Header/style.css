@@ -41,6 +41,7 @@ body{
     width: 25vw;
     background-color: transparent;
     border-radius: 10px;
+    position: relative;
     border: 1px solid var(--border);
     gap: 5px;
     padding: 5px 5px 5px 10px;
@@ -62,6 +63,88 @@ body{
     white-space: nowrap;
     caret-color: var(--title);
     color: var(--title);
+}
+
+.responseSearchDiv{
+    width: 100%;
+    right: -1px;
+    top: 36px;
+    position: absolute;
+    padding: 15px 0px 15px 0px;
+    border: 1px solid var(--border);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: none;
+    color: var(--subtitle);
+    border-radius: 0px 0px 10px 10px;
+    gap: 3px;
+    background-color: var(--backgroundColor);
+    transition: 0.3s ease-in-out;
+    z-index: 10;
+}
+
+.active {
+    border: 1px solid var(--blue);
+    border-top: none;
+}
+
+.sugestionCard{
+    width: 96%;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 8px;
+    padding: 6px;
+    box-sizing: border-box;
+    gap: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.sugestionCard:hover{
+    background-color: var(--shadow);
+}
+
+.sugestionCard img{
+    width: 30%;
+    border-radius: 6px;
+}
+
+.sugestionCard div{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sugestionCard div h4{
+    font-size: 1rem;
+    color: var(--title);
+}
+
+.sugestionCard div p{
+    font-size: 0.9rem;
+}
+
+.sugestionCard div h4,
+.sugestionCard div p{
+    margin: 0;
+}
+
+.spanInDivSugestions{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: var(--subtitle);
+}
+
+.spanInDivSugestions p{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: var(--subtitle);
 }
 
 .icon{

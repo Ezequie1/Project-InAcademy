@@ -22,6 +22,7 @@ export function BigCardCourse(){
                         <FavoriteBorderRounded fontSize='large'/>
                     </div>
                     <p className='descriptionInBigCard'>Aprenda do Zero a linguagem de programação que mais cresce no mundo, com projetos reais e sem slides!</p>
+                    <p className='descriptionInBigCard'>Alexandre de Moraes</p>
                     <div className='divWithCharacteristics'>
                         <p><PeopleAltIcon/> 335</p>
                         <p><AccessTimeIcon/> 79 horas</p>

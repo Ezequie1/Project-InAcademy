@@ -24,6 +24,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Context } from '../../Context/authProvider'
 import { ConfigContext } from '../../Context/configProvider'
 import CheckIcon from '@mui/icons-material/Check'
+import { CircularProgress } from '@mui/material'
+import { searchCourse } from '../../Service'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 
 export function Header(){
     const { userData, logout } = useContext(Context)
@@ -31,6 +35,41 @@ export function Header(){
     const [ open, setOpen ] = useState({ side: '-500px', mask: '0', index: '-3'})
     const [ selected, setSelected ] = useState('home')
     const location = useLocation()
+    const [ search, setSearch ] = useState({
+        open: false,
+        sugestion: 'O que vamos procurar?'
+    })
+
+    const activeBorderSearch = () => {
+        document.querySelector('.responseSearchDiv').classList.toggle('active')
+    }
+
+    const takeSugestion = (query) => {
+        searchCourse(query).then( res => {
+
+            if(res.data.length !== 0){
+                setSearch({...search,
+                    sugestion: (
+                        res.data.map( (course, index) => {
+                            return(
+                                <div className='sugestionCard' key={index}>
+                                    <img src={ course.urlImageCourse } alt=''/>
+                                    <div>
+                                        <h4>{ course.title }</h4>
+                                        <p>{ course.authorName }</p>
+                                        <span className='spanInDivSugestions'>
+                                            <p style={{marginRight: '9px'}}><AccessTimeIcon fontSize='small'/>{ course.contents.length * 20 }h</p>
+                                            <p><PeopleAltIcon fontSize='small'/>{ course.contents.length }</p>
+                                        </span>
+                                    </div>
+                                </div> 
+                            )
+                        })
+                    )
+                })
+            }
+        })
+    }
 
     useEffect(() => {
         let path = location.pathname.split('/')[1]
@@ -70,7 +109,23 @@ export function Header(){
                 <div className='divRight'>
                     <div className='divInputSearch'>
                         <SearchRoundedIcon fontSize='large' className='icon'/>
-                        <input type="text" placeholder='Pesquisar cursos...'/>
+                        <input 
+                            type="text" 
+                            id='inputSearchCourses' 
+                            placeholder='Pesquisar cursos...' 
+                            onFocus={() =>{
+                                setSearch({...search, open: true})
+                                activeBorderSearch()
+                            }} 
+                            onBlur={() => {
+                                setSearch({...search, open: false })
+                                activeBorderSearch()
+                            }}
+                            onChange={ e => takeSugestion(e.target.value)}
+                        />
+                        <div className='responseSearchDiv' style={{ display: search.open ? 'flex' : 'none' }}>
+                            { search.sugestion }
+                        </div>
                     </div>
                     <div className='notifyDiv'>
                         <NotificationsNoneRoundedIcon fontSize='large' className='icon'/>

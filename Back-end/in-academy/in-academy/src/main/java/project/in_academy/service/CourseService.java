@@ -31,4 +31,8 @@ public class CourseService {
     public List<Course> getCourseByCategory(String category) {
         return repository.findByCategory(Categories.valueOf(category)).orElseThrow(() -> new RuntimeException("Nenhum curso encontrado com esta categoria!"));
     }
+
+    public List<Course> searchCourses(String query) {
+        return repository.findByTitleContaining(query).stream().limit(3).toList();
+    }
 }

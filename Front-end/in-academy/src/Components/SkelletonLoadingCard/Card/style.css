@@ -1,0 +1,51 @@
+.cardLoading{
+    box-sizing: border-box;
+    width: 215px;
+    padding: 8px;
+    background-color: var(--backgroundColor);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 10px;
+    height: 369px;
+}
+
+.cardLoading div{
+    width: 100%;
+    height: 120px;
+    background-color: var(--border);
+    border-radius: 6px;
+    animation: loading infinite 2s;
+}
+
+.cardLoading h3{
+    width: 90%;
+    height: 20px;
+    background-color: var(--border);
+    border-radius: 6px;
+    margin: 0;
+    animation: loading infinite 2s;
+}
+
+.cardLoading p{
+    width: 70%;
+    height: 15px;
+    background-color: var(--border);
+    border-radius: 6px;
+    margin: 0;
+    animation: loading infinite 2s;
+}
+
+@keyframes loading{
+    0%{
+        opacity: 0.8;
+    }
+    50%{
+        opacity: 0.3;
+    }
+    100%{
+        opacity: 0.8;
+    }
+}

@@ -16,4 +16,6 @@ public interface CourseRepository extends JpaRepository<Course, String> {
     Optional<List<Course>> findRecentlyAddedCourses();
 
     Optional<List<Course>> findByCategory(Categories category);
+
+    List<Course> findByTitleContaining(String query);
 }

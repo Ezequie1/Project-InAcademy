@@ -28,6 +28,11 @@ public class CourseController {
         return ResponseEntity.ok().body(service.getCourseById(id));
     }
 
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<Course>> searchCourses(@PathVariable String query){
+        return ResponseEntity.ok().body(service.searchCourses(query));
+    }
+
     @GetMapping("/recently")
     public ResponseEntity<List<Course>> getRecentlyAddedCourses(){
         return ResponseEntity.ok().body(service.getRecentlyAddedCourses());
