@@ -1,5 +1,7 @@
 package project.in_academy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +19,17 @@ public class Enrollments {
     private String enrollmentId;
     @ManyToOne
     @JoinColumn(name = "enrolledStudents")
+    @JsonManagedReference
     private Course courseId;
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonManagedReference
     private User userId;
     private Progress progress;
 
+    public Enrollments(User userId, Course courseId, Progress progress) {
+        this.userId = userId;
+        this.courseId = courseId;
+        this.progress = progress;
+    }
 }

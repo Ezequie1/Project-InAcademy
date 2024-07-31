@@ -8,10 +8,10 @@ export function ProgressCourseCard(params){
     const [ progress, setProgress ] = useState(0)
 
     function process(value) {
-        if(value <= params.course.progress){
+        if(value <=  Math.floor(Math.random() * 100)){
             setTimeout(() => {
                 setProgress(value)
-                process(value + 1)      
+                process(value + 1)
             }, 20);
         }
     }
@@ -22,12 +22,12 @@ export function ProgressCourseCard(params){
     return(
         <div className='cardInProgress'>
             <div className='infosCardProgress'>
-                <img src={params.course.img} alt=''/>
+                <img src={params.course.urlImageCourse} alt=''/>
                 <div>
                     <h3>{ params.course.title }</h3>
-                    <p>{ params.course.author }</p>
+                    <p>{ params.course.authorName }</p>
                     <div className='moreInfosCourse'> 
-                        <p><PersonOutlineRoundedIcon/>{ params.course.totalUsers }</p>
+                        <p><PersonOutlineRoundedIcon/>{ params.course.totalUsersEnrollmenteds }</p>
                         <p><AccessTimeRoundedIcon/>{ params.course.totalHours }h</p>
                     </div>
                 </div>

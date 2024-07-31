@@ -1,0 +1,138 @@
+.bigCardCourse{
+    width: clamp(400px, 90vw, 1152px);
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    background-color: var(--backgroundColor);
+    transition: 0.3s ease-in;
+    margin-bottom: 25px;
+    gap: 20px;
+    height: 290px;
+}
+
+.bigCardCourse:hover{
+    border: 1px solid var(--blue);
+}
+
+.firstDivBigCard{
+    position: relative;
+}
+
+.firstDivBigCard img{
+    border-radius: 6px;
+    width: clam(300px, 50vw, 480px);
+}
+
+.newTagInBigCard{
+    position: absolute;
+    background-color: var(--red);
+    box-sizing: border-box;
+    padding: 10px 15px 10px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #fff;
+    right: 10px;
+    top: 10px;
+}
+
+
+
+.secondDivBigCard{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 100%;
+}
+
+.expandSection{
+    flex-grow: 1;
+}
+
+.divTitleAndFavoriteBigCard{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divTitleAndFavoriteBigCard h3{
+    font-size: 1.2rem;
+    color: var(--title);
+    margin-bottom: 0;
+}
+
+.divTitleAndFavoriteBigCard svg{
+    color: var(--title);
+}
+
+.descriptionInBigCard{
+    color: var(--subtitle);
+    font-size: 1rem;
+    margin: 10px 0px 10px 0px;
+}
+
+.divWithCharacteristics{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.divWithCharacteristics p{
+    box-sizing: border-box;
+    padding: 5px;
+    height: clamp(34px, 100%, 34px);
+    border-radius: 10px;
+    margin: 0;
+    word-break: nowrap;
+    background-color: var(--shadow);
+    color: var(--title);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divRatingInBigCard{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 10px 0px 0px 0px;
+}
+
+.divRatingInBigCard h4{
+    font-size: 1.2rem;
+    color: var(--title);
+    margin: 0px 4px 0px 0px
+}
+
+.divRatingInBigCard p{
+    font-size: 1rem;
+    color: var(--title);
+    margin: 0;
+}
+
+.divButtonInBigCard{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.divButtonInBigCard button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    background-color: var(--blue);
+    border-radius: 10px;
+    height: 35px;
+    box-sizing: border-box;
+    padding: 20px 30px 20px 30px;
+}

@@ -1,18 +1,37 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getTopUsersRanking } from '../Service'
+import { getAllCoursesEnrolled, getAllRecentlyAddedCourses, getTopUsersRanking, getCoursesByCategory, getAllCourses} from '../Service'
 
 export const DataContext = createContext()
 
 export function DataProviderContext({ children }){
 
     const [topUsersRanking, setTopUsersRanking] = useState([])
+    const [inProgressCourses, setInProgressCourses] = useState([])
+    const [recentlyAddedCourses, setRecentlyAddedCourses] = useState([])
+    const [coursesByCategory, setCoursesByCategory] = useState([])
+    const [allCourses, setAllCourses] = useState([])
 
     useEffect(() => {
         function loadData(){
             getTopUsersRanking().then( res => {
                 setTopUsersRanking(res.data)
-            }).catch( err => {
-                console.log("Erro ao carregar ranking de usuários!", err)
+            })
+
+            getAllCoursesEnrolled().then( res => {
+                setInProgressCourses(res.data)
+                console.log(res.data)
+            })
+
+            getAllRecentlyAddedCourses().then( res => {
+                setRecentlyAddedCourses(res.data)
+            })
+
+            getCoursesByCategory().then( res => {
+                setCoursesByCategory(res.data)
+            })
+
+            getAllCourses().then( res => {
+                setAllCourses(res.data)
             })
         }
 
@@ -21,7 +40,7 @@ export function DataProviderContext({ children }){
 
 
     return(
-    <DataContext.Provider value={{ topUsersRanking }}>
+    <DataContext.Provider value={{ topUsersRanking, inProgressCourses, recentlyAddedCourses, coursesByCategory, allCourses}}>
         { children }
     </DataContext.Provider>
     )

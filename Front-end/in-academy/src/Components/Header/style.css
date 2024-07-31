@@ -275,7 +275,6 @@ body{
     background-color: var(--shadow);
     border-radius: 15px;
     display: flex;
-
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -336,7 +335,16 @@ body{
     font-size: 1rem;
     font-weight: bold;
     height: 40px;
-    margin-bottom: 2vh
+    margin-bottom: 2vh;
+
+}
+
+.userInfosSideNav button svg{
+    transition: 0.2s ease-in;
+}
+
+.userInfosSideNav button:hover svg{
+    color: var(--red);
 }
 
 .sectedSideNav{

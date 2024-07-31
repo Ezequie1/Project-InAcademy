@@ -1,5 +1,6 @@
 package project.in_academy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -32,6 +33,7 @@ public class Course {
     private String authorName;
     private int coursePoints;
     private int totalHours;
+    private int totalUsersEnrollmenteds;
     @Max(5)
     private int rating;
     @Enumerated(EnumType.STRING)
@@ -39,6 +41,7 @@ public class Course {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate creationDate;
     @OneToMany(mappedBy = "courseId")
+    @JsonBackReference
     private List<Enrollments> enrolledStudents;
     @OneToMany(mappedBy = "courseId")
     private List<Chapter> contents;

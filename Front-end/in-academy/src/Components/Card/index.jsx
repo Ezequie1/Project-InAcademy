@@ -9,39 +9,32 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 
 export function CardCourse(params){
 
-    function isNew(){
-        const oneWeekBefore = new Date()
-        oneWeekBefore.setDate(oneWeekBefore.getDate() - 7)
-        const dateFormated = oneWeekBefore.toISOString().slice(0, 19).replace(" ").split('T')[0]
-
-        //return dateFormated < params.course.creationDate
-        return true
-    }
-
     function isFavorite(){
         return true
     }
 
     return(
         <div className='cardCourse'>
-            <img src={ params.course.img } alt=''/>
-            { isNew() && <span className='newCourse'>Novo</span>}
-            <h3>{ params.course.title }</h3>
-            <p>{ params.course.author }</p>
-            <div className='totalUsersAndTotalHoursDiv'>
-                <p><PeopleAltIcon/> { params.course.totalUsers } </p>
-                <p><AccessTimeIcon/> { params.course.totalHours }h</p>
-            </div>
-            <Rating
-                name="half-rating"
-                defaultValue={ params.course.rating }
-                readOnly
-                emptyIcon={<StarIcon style={{ opacity: 1 }} fontSize="inherit" />}
-                precision={0.1}
-            />
-            <div className='ratingInfosDiv'>
-                <h4>{ params.course.rating }</h4>
-                <p>{ params.course.totalUsers }</p>
+            <div className='divUpInfosCardCourse'>
+                <img src={ params.course.urlImageCourse } alt=''/>
+                { params.isRecently && <span className='newCourse'>Novo</span>}
+                <h3>{ params.course.title }</h3>
+                <p className='subtitleStyleCardCourse'>{ params.course.authorName }</p>
+                <div className='totalUsersAndTotalHoursDiv'>
+                    <p><PeopleAltIcon/> { params.course.totalUsersEnrollmenteds } </p>
+                    <p><AccessTimeIcon/> { params.course.contents * 20 }h</p>
+                </div>
+                <Rating
+                    name="half-rating"
+                    defaultValue={ params.course.rating }
+                    readOnly
+                    emptyIcon={<StarIcon style={{ opacity: 1 }} fontSize="inherit" />}
+                    precision={0.1}
+                />
+                <div className='ratingInfosDiv'>
+                    <h4>{ params.course.rating }</h4>
+                    <p>{ params.course.totalUsersEnrollmenteds }</p>
+                </div>
             </div>
             <div className='divWithButtonCard'>
                 { isFavorite() ? 

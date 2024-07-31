@@ -1,5 +1,6 @@
 package project.in_academy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -37,6 +38,7 @@ public class User implements UserDetails {
     private int userPoints;
     private String urlImageUser;
     @OneToMany(mappedBy = "userId")
+    @JsonBackReference
     private List<Enrollments> courses;
     @OneToMany(mappedBy = "userId")
     private List<Favorites> favoritesCourses;
