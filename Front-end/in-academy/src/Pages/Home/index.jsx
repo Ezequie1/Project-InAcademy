@@ -1,123 +1,64 @@
-import React, { useContext } from 'react'
-import './style.css'
+import { BigCardCourse } from './Components/BigCardCourse'
+import { CarrouselSlider } from './Components/Carrousel'
+import { DataContext } from '../../Context/dataProvider'
+import { ModalMoreInfos } from './Components/MoreInfos'
+import { SectionCard } from '../../Components/Section'
+import { Context } from '../../Context/authProvider'
+import React, { useContext, useEffect } from 'react'
+import { CardInfo } from './Components/CardInfos'
 import { Ranking } from './Components/Ranking'
 import { QrCode } from './Components/QrCode'
-import { CarrouselSlider } from './Components/Carrousel'
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
-import { ProgressCourseCard } from './Components/ProgressCourseCard'
-import { CardCourse } from '../../Components/Card'
-import { ModalMoreInfos } from './Components/MoreInfos'
-import { Context } from '../../Context/authProvider'
-import { CardInfo } from './Components/CardInfos'
-import { BigCardCourse } from './Components/BigCardCourse'
 import { Link } from 'react-router-dom'
-import { DataContext } from '../../Context/dataProvider'
-import { CardLoading } from '../../Components/SkelletonLoadingCard/Card'
-import { CardProgressLoading } from '../../Components/SkelletonLoadingCard/CardProgess'
+import './style.css'
 
 export function HomePage(){
-    const { userData } = useContext(Context);
-    const { inProgressCourses, recentlyAddedCourses, coursesByCategory, allCourses } = useContext(DataContext)
+    const { userData } = useContext(Context)
+    const { inProgressCourses, recentlyAddedCourses, coursesByCategory, allCourses, loadAllData } = useContext(DataContext)
 
-    const smoothCarrousel = (id, to) => {
-        let size = ( window.innerWidth / 10 ) * 4.4 + 20
-        document.getElementById(id).scrollBy({
-            left: to === 'left' ? -size : +size,
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
+    // eslint-disable-next-line
+    useEffect(() => loadAllData(), [])
 
     return(
         <>
             <Ranking/>
-            <QrCode/>
-            <section className='contentHome'>
+            <QrCode/>            
+            <section className='container'>
                 <CarrouselSlider/>
-                <div className='welcomeDiv'>
-                    <h1>Bem vindo { userData && userData.name.split(" ")[0] }!</h1>
-                    <Link to='/meu-aprendizado'>
-                        <p>{ inProgressCourses.length !== 0 && 'Cursos em progresso' }</p>
+                { inProgressCourses.length > 0 &&
+                    <SectionCard 
+                        data={inProgressCourses} 
+                        titleSection={`Bem vindo ${userData && userData.name.split(" ")[0]}`} 
+                        nameLink={'Cursos em progresso'} 
+                        linkSection={'/meu-aprendizado'}
+                        isProgressCard={true}
+                    />
+                }
+                <SectionCard 
+                    data={recentlyAddedCourses} 
+                    titleSection={inProgressCourses.length > 0 ? 'Recentemente adicionados' : `Bem vindo ${userData && userData.name.split(" ")[0]}!`} 
+                    nameLink={'Recentemente adicionados'} 
+                    linkSection={'/todos-os-cursos/recentes'}
+                />
+                <SectionCard 
+                    data={coursesByCategory} 
+                    titleSection={'Busque por categoria'} 
+                    nameLink={'Categorias'} 
+                    linkSection={'/todos-os-cursos/category'}
+                />
+                <CardInfo/>
+                <div className='titleSection'>
+                    <h1>Aqui vai uma sugestão para você!</h1>
+                    <Link to='/todos-os-cursos'>
+                        <p>Ver mais</p>
                     </Link>
                 </div> 
-
-                        <div className='contentDiv' style={{ width: inProgressCourses.length < 3 ? 'clamp(400px, 90vw, 1152px)' : 'clamp(400px, calc(90vw + 48px), 1200px)'}}>
-                            { inProgressCourses.length > 2 && <ArrowBackIosNewRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('inProgressDiv', 'left')}/> }
-                            <div className='inProgressCoursesDiv' id='inProgressDiv'>
-                                { inProgressCourses.length === 0 ? 
-                                    <CardProgressLoading/>: 
-                                    <>
-                                        { inProgressCourses.map((course, index) => <ProgressCourseCard course={course} key={index}/> ) }
-                                    </>
-                                }
-                                  
-                            </div>
-                            { inProgressCourses.length > 2 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('inProgressDiv', 'right')}/> }
-                        </div>
-                        <div className='welcomeDiv'>
-                            <h1>Recentemente adicionados</h1>
-                            <Link to='/todos-os-cursos/recentes'>
-                                <p>Recentes</p>
-                            </Link>
-                        </div>
-
-                <div className='contentDiv' style={{ width: recentlyAddedCourses.length < 5 || recentlyAddedCourses.length === 0 ? 'clamp(400px, 90vw, 1152px)' : 'clamp(400px, calc(90vw + 48px), 1200px)'}}>
-                    { recentlyAddedCourses.length > 4 && <ArrowBackIosNewRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'left')}/> }
-                        <div className='inProgressCoursesDiv' id='addRecently'>
-                            { recentlyAddedCourses.length === 0 ? 
-                                <CardLoading/>:
-                                <>
-                                    { recentlyAddedCourses.map((course, index) => <CardCourse course={course} isRecently key={index}/> ) } 
-                                </>
-                            }
-                        </div>
-                    { recentlyAddedCourses.length > 4 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('addRecently', 'right')}/> }                    
-                </div>
-                <div className='welcomeDiv'>
-                    <h1>Busque por categoria</h1>
-                    <Link to='/todos-os-cursos/category'>
-                        <p>Categorias</p>
-                    </Link>
-                </div>
-                <div className='contentDiv' style={{ width: coursesByCategory.length < 5 || coursesByCategory.length === 0 ? 'clamp(400px, 90vw, 1152px)' : 'clamp(400px, calc(90vw + 48px), 1200px)'}}>
-                    { coursesByCategory.length > 4 && <ArrowBackIosNewRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('categoryContent', 'left')}/> }
-                    <div className='inProgressCoursesDiv' id='categoryContent'>
-                        { coursesByCategory.length === 0 ? 
-                            <CardLoading/>:
-                            <>
-                                { coursesByCategory.map((course, index) => <CardCourse course={course} key={index}/> )}
-                            </>
-                        }
-                    </div>
-                    { coursesByCategory.length > 4 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('categoryContent', 'right')}/> }
-                </div>
-                <CardInfo/>
-                <div className='welcomeDiv'>
-                    <h1>Aqui vai uma sugestão pra você!</h1>
-                    <Link to='/todos-os-cursos'>
-                        <p>Ver mais</p>
-                    </Link>
-                </div>
                 <BigCardCourse/>
-                <div className='welcomeDiv'>
-                    <h1>Todos os cursos</h1>
-                    <Link to='/todos-os-cursos'>
-                        <p>Ver mais</p>
-                    </Link>
-                </div>
-                <div className='contentDiv' style={{ width: allCourses.length < 5 || allCourses.length === 0 ? 'clamp(400px, 90vw, 1152px)' : 'clamp(400px, calc(90vw + 48px), 1200px)'}}>
-                    { allCourses.length > 4 && <ArrowBackIosNewRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('allCoursesContent', 'left')}/> }
-                    <div className='inProgressCoursesDiv' id='allCoursesContent'>
-                        { allCourses.length === 0 ? 
-                            <CardLoading/>:
-                            <>
-                                { allCourses.map((course, index) => <CardCourse course={course} key={index}/> ) }
-                            </>
-                        }   
-                    </div>
-                    { allCourses.length > 4 && <ArrowForwardIosRoundedIcon className='arrows' onClick={() =>  smoothCarrousel('allCoursesContent', 'right')}/> }
-                </div>
+                <SectionCard 
+                    data={allCourses} 
+                    titleSection={'Todos os cursos'} 
+                    nameLink={'Ver mais'} 
+                    linkSection={'/todos-os-cursos'}
+                />
             </section>
             <ModalMoreInfos/>
         </>

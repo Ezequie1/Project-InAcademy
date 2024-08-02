@@ -24,8 +24,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Context } from '../../Context/authProvider'
 import { ConfigContext } from '../../Context/configProvider'
 import CheckIcon from '@mui/icons-material/Check'
-import { CircularProgress } from '@mui/material'
-import { searchCourse } from '../../Service'
+import { searchCourse } from '../../Service/courseService'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 
@@ -101,7 +100,7 @@ export function Header(){
 
     return(
         <>
-            <nav className='header'>
+            <header className='header'>
                 <div className='divLeft'>
                     <MenuRoundedIcon fontSize='large' className='icon' onClick={moveSideNav}/>
                     <img src={ iconInm } alt=''/>
@@ -151,7 +150,7 @@ export function Header(){
                         <></>       
                     }
                 </div>
-            </nav>
+            </header>
             <div className='mask' style={{ opacity: open.mask, zIndex: open.index }} onClick={moveSideNav}></div>
             <div className='sideNav' style={{ left: open.side }}>
                 <section className='upSideNav'>

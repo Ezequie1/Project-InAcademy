@@ -1,53 +1,8 @@
-.contentHome{
+.container{
     width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-}
-
-.welcomeDiv{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    width: clamp(400px, 90vw, 1152px);
-}
-
-.welcomeDiv h1{
-    color: var(--title);
-}
-
-.welcomeDiv p{
-    color: var(--blue);
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0;
-}
-
-.contentDiv{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    box-sizing: border-box;
-}
-
-.inProgressCoursesDiv{
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-    gap: 10px;
-}
-
-.inProgressCoursesDiv::-webkit-scrollbar{
-    scroll-behavior: smooth;
-    display: none;
-}
-
-.arrows{
-    cursor: pointer;
-    color: var(--title);
 }

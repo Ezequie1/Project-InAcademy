@@ -1,0 +1,49 @@
+.titleSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: var(--principalWidthContent);
+}
+
+.titleSection h1{
+    color: var(--title);
+    font-size: 1.5rem;
+}
+
+.titleSection p{
+    color: var(--blue);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+.boxSection{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    box-sizing: border-box;
+}
+
+.arrows{
+    cursor: pointer;
+    color: var(--subtitle);
+}
+
+.arrows:hover{
+    color: var(--title);
+}
+
+.contentSectionCard{
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    gap: 10px;
+}
+
+.contentSectionCard::-webkit-scrollbar{
+    scroll-behavior: smooth;
+    display: none;
+}

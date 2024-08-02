@@ -23,6 +23,9 @@
   --colorQrCode: #fff;
   --lowOpacityBlue: #009de075;
   --lowOpacityYellow: #ffcc0070;
+  
+  --principalWidthContent: clamp(400px, 90vw, 1152px);
+  --secondaryWidthContent: clamp(400px, calc(90vw + 48px), 1200px);
 }
 
 [data-theme="dark"]{

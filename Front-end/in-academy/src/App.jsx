@@ -1,5 +1,4 @@
 import './App.css'
-import { Routes, Route, BrowserRouter, useLocation, Navigate } from 'react-router-dom'
 import { LoginPage } from './Pages/Auth'
 import { Header } from './Components/Header'
 import { HomePage } from './Pages/Home'
@@ -10,6 +9,7 @@ import { Context } from './Context/authProvider'
 import { UserConfigPage } from './Pages/Config'
 import { ContextConfig } from './Context/configProvider'
 import { DataProviderContext } from './Context/dataProvider'
+import { Routes, Route, BrowserRouter, useLocation, Navigate } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -61,6 +61,6 @@ const AuthRoute = ({ children }) => {
 
   const { isUserAuth } = useContext(Context)
 
-  return !isUserAuth ? <>{ children }</> : <Navigate to='/home'/>
+  return !isUserAuth ? children : <Navigate to='/home'/>
 }
 

@@ -1,22 +1,4 @@
-import axios from "axios"
-
-const api = axios.create({
-    baseURL : 'http://localhost:8080'
-})
-
-export async function sign(requestObject){
-    return await api.post(
-        '/auth/login',
-        requestObject
-    )
-}
-
-export async function register(requestObject){
-    return await api.post(
-        '/auth/register',
-        requestObject
-    )
-}
+import { api } from '../static/variables'
 
 export async function getUserWithContext(token){
     return await api.get(
@@ -73,51 +55,6 @@ export async function setStatusIsOnlineFalse(){
 
     return await api.get(
         '/user/online/false',
-        { headers: { Authorization: `Bearer ${token}` }}
-    )
-}
-
-export async function getAllCoursesEnrolled(){
-    let token = localStorage.getItem('t')
-
-    return await api.get(
-        '/enrollments/courses',
-        { headers: { Authorization: `Bearer ${token}` }}
-    )
-}
-
-export async function getAllRecentlyAddedCourses(){
-    let token = localStorage.getItem('t')
-
-    return await api.get(
-        '/course/recently',
-        { headers: { Authorization: `Bearer ${token}` }}
-    )
-}
-
-export async function getCoursesByCategory(){
-    let token = localStorage.getItem('t')
-
-    return await api.get(
-        '/course/category/TECHNOLOGY',
-        { headers: { Authorization: `Bearer ${token}` }}
-    )
-}
-
-export async function getAllCourses(){
-    let token = localStorage.getItem('t')
-
-    return await api.get(
-        '/course',
-        { headers: { Authorization: `Bearer ${token}` }}
-    )
-}
-
-export async function searchCourse(query){
-    let token = localStorage.getItem('t')
-
-    return await api.get(
-        '/course/search/' + query,
         { headers: { Authorization: `Bearer ${token}` }}
     )
 }

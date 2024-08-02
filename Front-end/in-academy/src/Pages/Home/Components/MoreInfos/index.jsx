@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import CheckIcon from '@mui/icons-material/Check'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { Context } from '../../../../Context/authProvider'
-import { setImageUser, changeOffice } from '../../../../Service'
+import { setImageUser, changeOffice } from '../../../../Service/userService'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { ConfigContext } from '../../../../Context/configProvider'
 

@@ -33,6 +33,6 @@ public class CourseService {
     }
 
     public List<Course> searchCourses(String query) {
-        return repository.findByTitleContaining(query).stream().limit(3).toList();
+        return repository.findByTitleContaining(query).stream().limit(5).toList();
     }
 }

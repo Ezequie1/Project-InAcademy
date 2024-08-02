@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { getUserWithContext, setStatusIsOnlineFalse, setStatusIsOnlineTrue } from '../Service'
+import { getUserWithContext, setStatusIsOnlineFalse, setStatusIsOnlineTrue } from '../Service/userService'
 import { Loading } from '../Components/Loading'
 
 export const Context = createContext()
@@ -33,7 +33,7 @@ export function AuthProvider({ children }){
         isLoged()
     }, [])
 
-    window.addEventListener('beforeunload', function () {
+    window.addEventListener('beforeunload',() => {
         setStatusIsOnlineFalse()
     })
 
