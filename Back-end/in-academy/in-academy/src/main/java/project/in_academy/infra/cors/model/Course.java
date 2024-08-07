@@ -1,4 +1,4 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.in_academy.model.enums.Categories;
+import project.in_academy.infra.cors.model.enums.Categories;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -49,5 +49,6 @@ public class Course {
     private List<Comments> comments;
     @JsonIgnore
     @OneToMany(mappedBy = "courseId")
+    @JsonBackReference
     private List<Favorites> favorites;
 }

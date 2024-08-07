@@ -1,11 +1,11 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.in_academy.model.enums.ClassType;
+import project.in_academy.infra.cors.model.enums.ClassType;
 
 import java.util.List;
 

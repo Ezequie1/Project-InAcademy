@@ -3,8 +3,8 @@ package project.in_academy.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import project.in_academy.model.Course;
-import project.in_academy.model.enums.Categories;
+import project.in_academy.infra.cors.model.Course;
+import project.in_academy.infra.cors.model.enums.Categories;
 
 import java.util.List;
 import java.util.Optional;

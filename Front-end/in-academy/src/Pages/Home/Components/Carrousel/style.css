@@ -1,6 +1,7 @@
 .carrousel{
     display: flex;
     justify-content: center;
+    width: var(--principalWidthContent);
 }
 
 .carrousel img{

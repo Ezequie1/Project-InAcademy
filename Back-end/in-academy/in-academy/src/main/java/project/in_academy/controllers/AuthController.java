@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.in_academy.dto.LoginRequestDTO;
 import project.in_academy.dto.RegisterRequestDTO;
 import project.in_academy.dto.TokenResponseDTO;
-import project.in_academy.model.User;
+import project.in_academy.infra.cors.model.User;
 import project.in_academy.service.AuthenticationService;
 
 @RestController

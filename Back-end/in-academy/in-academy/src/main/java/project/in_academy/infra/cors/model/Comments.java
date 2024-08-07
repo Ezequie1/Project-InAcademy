@@ -1,25 +1,31 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Chapter {
+public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String chapterId;
+    private String commentId;
     private String title;
+    private String text;
+    @Max(5)
+    private int rating;
+    private LocalDate commentDate;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User userId;
     @ManyToOne
     @JoinColumn(name = "courseId")
     private Course courseId;
-    @OneToMany(mappedBy = "chapterId")
-    private List<Class> classContents;
 }

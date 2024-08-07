@@ -33,8 +33,8 @@ export function ContextConfig({ children }){
         }
 
         getTheme()
+        // eslint-disable-next-line
     }, [])
-
 
     return(
         <ConfigContext.Provider value={{ theme, changeTheme, setSnack }}>

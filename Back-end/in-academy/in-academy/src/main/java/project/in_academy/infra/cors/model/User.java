@@ -1,4 +1,4 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +41,7 @@ public class User implements UserDetails {
     @JsonBackReference
     private List<Enrollments> courses;
     @OneToMany(mappedBy = "userId")
+    @JsonBackReference
     private List<Favorites> favoritesCourses;
     @OneToMany(mappedBy = "userId")
     private List<Comments> comments;

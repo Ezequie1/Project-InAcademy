@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import project.in_academy.dto.LoginRequestDTO;
 import project.in_academy.dto.RegisterRequestDTO;
 import project.in_academy.dto.TokenResponseDTO;
-import project.in_academy.model.User;
+import project.in_academy.infra.cors.model.User;
 import project.in_academy.repository.UserRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package project.in_academy.model.enums;
+package project.in_academy.infra.cors.model.enums;
 
 import lombok.Getter;
 

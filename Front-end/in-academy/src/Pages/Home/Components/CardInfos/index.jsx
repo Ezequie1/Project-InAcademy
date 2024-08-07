@@ -1,6 +1,6 @@
+import ComunityIcon from '../../../../Images/comunityIcon.png'
 import React from 'react'
 import './style.css'
-import ComunityIcon from '../../../../Images/comunityIcon.png'
 
 export function CardInfo(){
     return(

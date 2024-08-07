@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react'
-import './style.css'
-import Cup from '../../../../Images/trofeu.png'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
-import { Link } from 'react-router-dom'
+import { generateRandomColor } from '../../../../static/variables'
 import { DataContext } from '../../../../Context/dataProvider'
 import { Context } from '../../../../Context/authProvider'
-import { generateRandomColor } from '../../../../static/variables'
+import React, { useContext, useState } from 'react'
+import Cup from '../../../../Images/trofeu.png'
+import { Link } from 'react-router-dom'
+import './style.css'
 
 export function Ranking(){
     const [ open, setOpen ] = useState('-400px')
@@ -23,8 +23,8 @@ export function Ranking(){
         if(index === 2) variation = 'bronze' 
 
         return(
-            <Link to={'/ranking/' + user.userId}>
-                <div className='itemRank' key={ index }>
+            <Link to={'/ranking/' + user.userId} key={ index }>
+                <div className='itemRank'>
                     <div className='infoAndUserImage'>
                         <div className='imageUserDivInRanking' style={{backgroundImage: `url(${ user.urlImageUser })`, backgroundColor: generateRandomColor() }}>
                             { !user.urlImageUser && user.name.split('')[0] }

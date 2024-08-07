@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import project.in_academy.model.User;
+import project.in_academy.infra.cors.model.User;
 import project.in_academy.repository.UserRepository;
 import project.in_academy.service.TokenService;
 

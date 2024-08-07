@@ -6,13 +6,11 @@ import { CardCourse } from '../Card'
 import React from 'react'
 import './style.css'
 
-export function SectionCard({ data, titleSection, nameLink, linkSection, isProgressCard}){
+export function SectionCard({data, titleSection, nameLink, linkSection, isProgressCard}){
 
     const smoothCarrousel = (id, to) => {
-        let size = ( window.innerWidth / 10 ) * 4.4 + 20
-
         document.getElementById(id).scrollBy({
-            left: to === 'left' ? -size : +size,
+            left: to === 'left' ? -717 : +717,
             top: 0,
             behavior: 'smooth'
         })

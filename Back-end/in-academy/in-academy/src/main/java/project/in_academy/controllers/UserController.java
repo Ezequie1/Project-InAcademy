@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.in_academy.dto.OfficeRequestDTO;
 import project.in_academy.dto.UsersRankingResponse;
-import project.in_academy.model.User;
+import project.in_academy.infra.cors.model.User;
 import project.in_academy.service.UserService;
 
 import java.util.List;

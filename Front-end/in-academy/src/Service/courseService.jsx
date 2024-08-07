@@ -44,3 +44,32 @@ export async function searchCourse(query){
         { headers: { Authorization: `Bearer ${token}` }}
     )
 }
+
+export async function getFavoritesCourses(){
+    let token = localStorage.getItem('t')
+
+    return await api.get(
+        '/favorites/all',
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}
+
+export async function favoriteCourse(courseId){
+    let token = localStorage.getItem('t')
+
+    return await api.post(
+        '/favorites/add/' + courseId,
+        {},
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}
+
+export async function removeFavorite(courseId){
+    let token = localStorage.getItem('t')
+
+    return await api.put(
+        '/favorites/remove/' + courseId,
+        {},
+        { headers: { Authorization: `Bearer ${token}` }}
+    )
+}

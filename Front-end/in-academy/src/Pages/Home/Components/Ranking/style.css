@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     right: 6vw;
     z-index: 3;
     top: 35%;

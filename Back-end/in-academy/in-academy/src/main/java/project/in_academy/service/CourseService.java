@@ -2,8 +2,8 @@ package project.in_academy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.in_academy.model.Course;
-import project.in_academy.model.enums.Categories;
+import project.in_academy.infra.cors.model.Course;
+import project.in_academy.infra.cors.model.enums.Categories;
 import project.in_academy.repository.CourseRepository;
 
 import java.util.List;

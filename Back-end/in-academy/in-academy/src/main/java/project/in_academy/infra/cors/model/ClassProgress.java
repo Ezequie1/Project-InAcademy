@@ -1,10 +1,10 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.in_academy.model.enums.Progress;
+import project.in_academy.infra.cors.model.enums.Progress;
 
 @Entity
 @Data

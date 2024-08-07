@@ -1,12 +1,11 @@
-package project.in_academy.model;
+package project.in_academy.infra.cors.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.in_academy.model.enums.Progress;
+import project.in_academy.infra.cors.model.enums.Progress;
 
 @Entity
 @Data

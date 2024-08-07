@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.in_academy.dto.EnrollmentRequestDTO;
-import project.in_academy.model.Course;
-import project.in_academy.model.Enrollments;
+import project.in_academy.infra.cors.model.Course;
+import project.in_academy.infra.cors.model.Enrollments;
 import project.in_academy.service.EnrollmentsService;
 
 import java.util.List;

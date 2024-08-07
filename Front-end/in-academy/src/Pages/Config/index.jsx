@@ -1,27 +1,27 @@
-import React, { useContext, useState } from 'react'
-import './style.css'
-import { Context } from '../../Context/authProvider'
-import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded'
-import FingerprintIcon from '@mui/icons-material/Fingerprint'
-import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
-import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
-import Tooltip from '@mui/material/Tooltip'
-import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
-import KeyboardVoiceRoundedIcon from '@mui/icons-material/KeyboardVoiceRounded'
-import PublicRoundedIcon from '@mui/icons-material/PublicRounded'
 import VideoCameraBackRoundedIcon from '@mui/icons-material/VideoCameraBackRounded'
+import KeyboardVoiceRoundedIcon from '@mui/icons-material/KeyboardVoiceRounded'
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded'
-import LockIcon from '@mui/icons-material/Lock'
+import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded'
+import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
-import { Radio } from '@mui/material'
-import { ConfigContext } from '../../Context/configProvider'
-import CircularProgress from '@mui/material/CircularProgress'
-import { changeOffice } from '../../Service/userService'
 import { ChangeUserImageModal } from './Components/ModalUserImage'
-import CheckIcon from '@mui/icons-material/Check'
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded'
+import PublicRoundedIcon from '@mui/icons-material/PublicRounded'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded'
+import FingerprintIcon from '@mui/icons-material/Fingerprint'
+import CircularProgress from '@mui/material/CircularProgress'
+import { ConfigContext } from '../../Context/configProvider'
+import { changeOffice } from '../../Service/userService'
+import { Context } from '../../Context/authProvider'
+import React, { useContext, useState } from 'react'
+import CheckIcon from '@mui/icons-material/Check'
+import LockIcon from '@mui/icons-material/Lock'
+import Tooltip from '@mui/material/Tooltip'
 import { Link } from 'react-router-dom'
+import { Radio } from '@mui/material'
+import './style.css'
 
 export function UserConfigPage(){
     const { userData, logout, setUser } = useContext(Context)
@@ -70,7 +70,7 @@ export function UserConfigPage(){
     }
     
     return(
-        <section className='contentHome'>
+        <section className='container'>
             <div className='backgroundCardConfigUser'>
                 <div className="spaceContentInfosUser">
                     <div>

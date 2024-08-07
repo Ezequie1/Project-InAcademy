@@ -1,32 +1,32 @@
-import './style.css'
-import React, { useContext } from 'react'
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
-import iconInm from '../../Images/logoSite.png'
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
-import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded'
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { useEffect, useState } from 'react'
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
-import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
-import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
-import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
-import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
-import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
-import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded'
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
+import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined'
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined'
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import NightsStayOutlinedIcon from '@mui/icons-material/NightsStayOutlined'
+import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded'
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
-import { Link, useLocation } from 'react-router-dom'
-import { Context } from '../../Context/authProvider'
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import React, { useContext, useEffect, useState } from 'react'
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 import { ConfigContext } from '../../Context/configProvider'
-import CheckIcon from '@mui/icons-material/Check'
-import { searchCourse } from '../../Service/courseService'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import { searchCourse } from '../../Service/courseService'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import { Context } from '../../Context/authProvider'
+import CheckIcon from '@mui/icons-material/Check'
+import iconInm from '../../Images/logoSite.png'
+import { useLocation } from 'react-router-dom'
+import { ItemSideNav } from '../ItemSideNav'
+import './style.css'
 
 export function Header(){
     const { userData, logout } = useContext(Context)
@@ -38,6 +38,16 @@ export function Header(){
         open: false,
         sugestion: 'O que vamos procurar?'
     })
+
+    useEffect(() => {
+        let path = location.pathname.split('/')[1]
+
+        if (path !== selected){
+            setSelected(path)
+            changeSelection(path)
+        }
+        // eslint-disable-next-line
+    }, [location.pathname])
 
     const activeBorderSearch = () => {
         document.querySelector('.responseSearchDiv').classList.toggle('active')
@@ -69,16 +79,6 @@ export function Header(){
             }
         })
     }
-
-    useEffect(() => {
-        let path = location.pathname.split('/')[1]
-
-        if (path !== selected){
-            setSelected(path)
-            changeSelection(path)
-        }
-        // eslint-disable-next-line
-    }, [location.pathname])
 
     const moveSideNav = () => {
         if(open.side === '0'){
@@ -152,7 +152,7 @@ export function Header(){
                 </div>
             </header>
             <div className='mask' style={{ opacity: open.mask, zIndex: open.index }} onClick={moveSideNav}></div>
-            <div className='sideNav' style={{ left: open.side }}>
+            <nav className='sideNav' style={{ left: open.side }}>
                 <section className='upSideNav'>
                     <div className='logoAndBackIconDiv'>
                         <div>
@@ -162,64 +162,16 @@ export function Header(){
                         <ArrowBackIosNewRoundedIcon onClick={moveSideNav} className='icon'/>
                     </div>
                     <section className='contentItensNav'>
-                        <Link to='/home' onClick={moveSideNav}>
-                            <div className='item sectedSideNav' id='home'>
-                                <HomeOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Home
-                            </div>
-                        </Link>
-                        <Link to='/meu-aprendizado' onClick={moveSideNav}>
-                            <div className='item' id='meu-aprendizado'>
-                                <SchoolOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Meu aprendizado
-                            </div>
-                        </Link>
-                        <Link to='/comunidades' onClick={moveSideNav}>
-                            <div className='item' id='comunidades'>
-                                <PublicOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Comunidades
-                                <span>1</span>
-                            </div>
-                        </Link>
-                        <Link to='/todos-os-cursos' onClick={moveSideNav}>
-                            <div className='item' id='todos-os-cursos'>
-                                <AutoStoriesOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Todos os cursos
-                                <span>3</span>
-                            </div>
-                        </Link>
-                        <Link to='/membros' onClick={moveSideNav}>
-                            <div className='item' id='membros'>
-                                <Groups2OutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Membros
-                            </div>
-                        </Link>
-                        <Link to='/ranking' onClick={moveSideNav}>
-                            <div className='item' id='ranking'>
-                                <EmojiEventsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Ranking
-                            </div>
-                        </Link>
-                        <Link to='/notificacoes' onClick={moveSideNav}>
-                            <div className='item' id='notificacoes'>
-                                <NotificationsNoneOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Notificações
-                                <span>23</span>
-                            </div>
-                        </Link>
+                        <ItemSideNav title={'Home'} icon={<HomeOutlinedIcon/>} isHome={true} link={'/home'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Meu aprendizado'} icon={<SchoolOutlinedIcon/>} link={'/meu-aprendizado'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Comunidades'} icon={<PublicOutlinedIcon/>} link={'/comunidades'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Todos os cursos'} icon={<AutoStoriesOutlinedIcon/>} link={'/todos-os-cursos'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Membros'} icon={<Groups2OutlinedIcon/>} link={'/membros'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Ranking'} icon={<EmojiEventsOutlinedIcon/>} link={'/ranking'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Notificações'} icon={<NotificationsNoneOutlinedIcon/>} link={'/notificacoes'} changeNav={moveSideNav}/>
                         <hr/>
-                        <Link to='/configuracoes' onClick={moveSideNav}>
-                            <div className='item' id='configuracoes'>
-                                <SettingsOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Configurações
-                            </div>
-                        </Link>
-                        <Link to='/suporte' onClick={moveSideNav}>
-                            <div className='item' id='suporte'>
-                                <HelpOutlineOutlinedIcon className='iconSideNav' style={{fontSize:'2rem'}}/> 
-                                Suporte
-                            </div>
-                        </Link>
+                        <ItemSideNav title={'Configurações'} icon={<SettingsOutlinedIcon/>} link={'/configuracoes'} changeNav={moveSideNav}/>
+                        <ItemSideNav title={'Suporte'} icon={<HelpOutlineOutlinedIcon/>} link={'/suporte'} changeNav={moveSideNav}/>
                     </section>
                 </section>
                 <section className='downSideNav'>
@@ -264,7 +216,7 @@ export function Header(){
                         </button>
                     </div>
                 </section>
-            </div>
+            </nav>
         </>
     )
 }

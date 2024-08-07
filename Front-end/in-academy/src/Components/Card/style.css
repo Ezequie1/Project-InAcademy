@@ -115,6 +115,10 @@
     font-size: 1.8rem;
 }
 
+.divWithButtonCard a{
+    width: 100%;
+}
+
 .divWithButtonCard button{
     width: 100%;
     height: 2rem;

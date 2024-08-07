@@ -1,11 +1,11 @@
+import TypeSpecimenIcon from '@mui/icons-material/TypeSpecimen'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import { FavoriteBorderRounded } from '@mui/icons-material'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import StarIcon from '@mui/icons-material/Star'
+import Rating from '@mui/material/Rating'
 import React from 'react'
 import './style.css'
-import { FavoriteBorderRounded } from '@mui/icons-material'
-import Rating from "@mui/material/Rating"
-import StarIcon from '@mui/icons-material/Star'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
-import TypeSpecimenIcon from '@mui/icons-material/TypeSpecimen'
 
 export function BigCardCourse(){
     

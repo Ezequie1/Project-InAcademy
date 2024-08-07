@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import project.in_academy.model.Course;
+import project.in_academy.infra.cors.model.Course;
 import project.in_academy.service.CourseService;
 
 import java.util.List;

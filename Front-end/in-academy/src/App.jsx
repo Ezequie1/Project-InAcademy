@@ -1,15 +1,16 @@
-import './App.css'
-import { LoginPage } from './Pages/Auth'
-import { Header } from './Components/Header'
-import { HomePage } from './Pages/Home'
-import { Footer } from './Components/Footer'
+import { Routes, Route, BrowserRouter, useLocation, Navigate } from 'react-router-dom'
+import { DataProviderContext } from './Context/dataProvider'
+import { ContextConfig } from './Context/configProvider'
 import { AuthProvider } from './Context/authProvider'
-import { useContext } from 'react'
 import { Context } from './Context/authProvider'
 import { UserConfigPage } from './Pages/Config'
-import { ContextConfig } from './Context/configProvider'
-import { DataProviderContext } from './Context/dataProvider'
-import { Routes, Route, BrowserRouter, useLocation, Navigate } from 'react-router-dom'
+import { SupportPage } from './Pages/Support'
+import { Footer } from './Components/Footer'
+import { Header } from './Components/Header'
+import { LoginPage } from './Pages/Auth'
+import { HomePage } from './Pages/Home'
+import { useContext } from 'react'
+import './App.css'
 
 export default function App() {
   return (
@@ -42,7 +43,7 @@ function AppContent(){
         <Route path="/ranking/*" element={<PrivateRoute>Ranking</PrivateRoute>}/>
         <Route path="/notificacoes/*" element={<PrivateRoute>Notificacoes</PrivateRoute>}/>
         <Route path="/configuracoes" element={<PrivateRoute><UserConfigPage/></PrivateRoute>}/>
-        <Route path="/suporte" element={<PrivateRoute>Suporte</PrivateRoute>}/>
+        <Route path="/suporte" element={<PrivateRoute><SupportPage/></PrivateRoute>}/>
         <Route path="*" element={<Navigate to='/auth'/>}/>
       </Routes>
       { !isAuthPath && <Footer/> }
@@ -51,14 +52,12 @@ function AppContent(){
 }
 
 const PrivateRoute = ({ children }) => {
-
   const { isUserAuth } = useContext(Context)
 
-  return isUserAuth ? <>{ children }</> : <Navigate to='/auth'/>
+  return isUserAuth ? children : <Navigate to='/auth'/>
 }
 
 const AuthRoute = ({ children }) => {
-
   const { isUserAuth } = useContext(Context)
 
   return !isUserAuth ? children : <Navigate to='/home'/>
