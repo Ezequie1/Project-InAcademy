@@ -37,8 +37,6 @@ export function UserConfigPage(){
     const setOffice = () =>{
         let office = document.getElementById('inputChangeOfficeConfigPage').value
         setOpen({...open, textOffice: <CircularProgress style={{ height: "20px", width: "20px", color: "#000" }}/>})
-
-        console.log(office)
         
         if(office !== ''){     
             changeOffice(office).then( res => {
@@ -276,7 +274,7 @@ export function UserConfigPage(){
                     <button onClick={logout}>Sair da conta</button>
                 </div>
             </div>
-            <ChangeUserImageModal open={open} setOpen={setOpen} />
+            <ChangeUserImageModal open={open} setOpen={setOpen}/>
         </section>
     )
 }

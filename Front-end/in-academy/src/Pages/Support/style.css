@@ -1,0 +1,75 @@
+.supportPageContent{
+    width: clamp(400px, 90vw, 1152px);
+    background-color: var(--backgroundColor);
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.usualyAsk{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.questionDiv{
+    display: flex;
+    justify-content: start;
+    border-radius: 10px;
+    border: 2px solid var(--shadow);
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 10px;
+}
+
+.questionDiv svg{ 
+    color: var(--blue);
+}
+
+.questionDiv h3{ 
+    font-size: 1.1rem;
+    color: var(--title);
+    margin: 7px 0px;
+}
+
+.questionDiv p{ 
+    font-size: 1rem;
+    color: var(--subtitle);
+    margin: 0px;
+}
+
+.inputsText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding:30px;
+    gap: 15px;
+}
+
+.inputsText div{
+    width: 100%;
+}
+
+.buttonSuportSubmit{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.buttonSuportSubmit button{
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: var(--yellow);
+    font-weight: bold;
+    font-size: 1rem;
+    box-sizing: border-box;
+    height: 40px;
+    width: 20%;
+    cursor: pointer;
+}
