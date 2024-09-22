@@ -71,7 +71,41 @@ function RenderAcordion({ ask, response }){
 
 function RenderTextFied({ label, defaultValue, multiline, rows}){
     return(
-        <TextField id="outlined-basic" label={label} variant="outlined" defaultValue={defaultValue} rows={ rows === 0 ? 1 : rows} multiline={multiline}/>
+        <TextField
+            id="outlined-basic"
+            label={label} 
+            variant="outlined" 
+            defaultValue={defaultValue} 
+            rows={ rows === 0 ? 1 : rows} 
+            multiline={multiline}
+            sx={{
+                "& .MuiOutlinedInput-root": {
+                color: "#fff",
+                "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "var(--blue)",
+                    borderWidth: "2px",
+                },
+                "&.Mui-focused": {
+                    "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "var(--blue)",
+                    borderWidth: "2px",
+                    },
+                },
+                "&:hover:not(.Mui-focused)": {
+                    "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "var(--blue)",
+                    },
+                },
+                },
+                "& .MuiInputLabel-outlined": {
+                color: "var(--title)",
+                fontWeight: "bold",
+                "&.Mui-focused": {
+                    color: "var(--blue)",
+                    fontWeight: "bold",
+                },
+                },
+            }}
+        />
     )
 }
-

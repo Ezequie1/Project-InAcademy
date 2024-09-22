@@ -21,6 +21,7 @@ import { ConfigContext } from '../../Context/configProvider'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { searchCourse } from '../../Service/courseService'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import FolderEmpty from '../../Images/FolderEmpty.png'
 import { Context } from '../../Context/authProvider'
 import CheckIcon from '@mui/icons-material/Check'
 import iconInm from '../../Images/logoSite.png'
@@ -54,30 +55,39 @@ export function Header(){
     }
 
     const takeSugestion = (query) => {
-        searchCourse(query).then( res => {
+        if(query !== ''){
+            searchCourse(query).then( res => {
 
-            if(res.data.length !== 0){
-                setSearch({...search,
-                    sugestion: (
-                        res.data.map( (course, index) => {
-                            return(
-                                <div className='sugestionCard' key={index}>
-                                    <img src={ course.urlImageCourse } alt=''/>
-                                    <div>
-                                        <h4>{ course.title }</h4>
-                                        <p>{ course.authorName }</p>
-                                        <span className='spanInDivSugestions'>
-                                            <p style={{marginRight: '9px'}}><AccessTimeIcon fontSize='small'/>{ course.contents.length * 20 }h</p>
-                                            <p><PeopleAltIcon fontSize='small'/>{ course.contents.length }</p>
-                                        </span>
-                                    </div>
-                                </div> 
-                            )
-                        })
-                    )
-                })
-            }
-        })
+                if(res.data.length !== 0){
+                    setSearch({...search,
+                        sugestion: (
+                            res.data.map( (course, index) => {
+                                return(
+                                    <div className='sugestionCard' key={index}>
+                                        <img src={ course.urlImageCourse } alt=''/>
+                                        <div>
+                                            <h4>{ course.title }</h4>
+                                            <p>{ course.authorName }</p>
+                                            <span className='spanInDivSugestions'>
+                                                <p style={{marginRight: '9px'}}><AccessTimeIcon fontSize='small'/>{ course.contents.length * 20 }h</p>
+                                                <p><PeopleAltIcon fontSize='small'/>{ course.contents.length }</p>
+                                            </span>
+                                        </div>
+                                    </div> 
+                                )
+                            })
+                        )
+                    })
+                }else{
+                    setSearch({...search, sugestion: (
+                        <div className='notFindSearchDiv'>
+                            <img src={FolderEmpty} style={{width: '100px', height: '100px'}} alt=''/>
+                            <p>Ops, não encontramos nada!</p>
+                        </div>
+                    )})
+                }
+            })
+        }
     }
 
     const moveSideNav = () => {
